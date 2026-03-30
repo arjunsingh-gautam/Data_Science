@@ -1,7 +1,6 @@
 # <span style="color:yellow">📌 **What is a DataFrame in Python (Pandas)**
 
 ## 🔹 1. Definition
-
 * A **DataFrame** is a **two-dimensional, tabular data structure** in **Pandas**.
 * Think of it as a **table in Excel or SQL**:
 

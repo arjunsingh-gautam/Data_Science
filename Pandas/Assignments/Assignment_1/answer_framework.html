@@ -1,0 +1,4433 @@
+<div id="73e1c00a" class="cell code" data-execution_count="1">
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
+</div>
+<div id="6cf2cc03" class="cell code" data-execution_count="2">
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="vs">r&quot;D:\Desktop\Data_Science\Pandas\Assignments\Assignment_1\data.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="d97c33d5" class="cell code" data-execution_count="3">
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="output execute_result" data-execution_count="3">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Strategy</th>
+      <th>Campaign</th>
+      <th>Strategy Type</th>
+      <th>Seller</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Spend</th>
+      <th>Sales</th>
+      <th>Quotes</th>
+      <th>Unnamed: 10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>PubMatic</td>
+      <td>10</td>
+      <td>0</td>
+      <td>$0.02</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Google AdExchange</td>
+      <td>6859</td>
+      <td>0</td>
+      <td>$7.50</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Microsoft Advertising Exchange</td>
+      <td>74</td>
+      <td>0</td>
+      <td>$0.10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Technorati Media</td>
+      <td>7</td>
+      <td>0</td>
+      <td>$0.01</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Ybrant Digital</td>
+      <td>5</td>
+      <td>0</td>
+      <td>$0.01</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>19114</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Google AdExchange</td>
+      <td>962</td>
+      <td>0</td>
+      <td>$1.21</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19115</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>OpenX</td>
+      <td>697</td>
+      <td>1</td>
+      <td>$0.64</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19116</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Rubicon</td>
+      <td>2112</td>
+      <td>0</td>
+      <td>$3.02</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19117</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>OnScroll Limited</td>
+      <td>56</td>
+      <td>0</td>
+      <td>$0.11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19118</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Auto Trader Limited</td>
+      <td>299</td>
+      <td>0</td>
+      <td>$0.64</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>19119 rows × 11 columns</p>
+</div>
+</div>
+</div>
+<div id="27d9c784" class="cell code" data-execution_count="4">
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.columns</span></code></pre></div>
+<div class="output execute_result" data-execution_count="4">
+<pre><code>Index([&#39;Date&#39;, &#39;Strategy&#39;, &#39;Campaign&#39;, &#39;Strategy Type&#39;, &#39;Seller&#39;,
+       &#39;Impressions&#39;, &#39;Clicks&#39;, &#39; Spend&#39;, &#39;Sales&#39;, &#39;Quotes&#39;, &#39;Unnamed: 10&#39;],
+      dtype=&#39;object&#39;)</code></pre>
+</div>
+</div>
+<div id="056b25d0" class="cell code" data-execution_count="7">
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.drop(<span class="st">&#39;Unnamed: 10&#39;</span>,axis<span class="op">=</span><span class="dv">1</span>,inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+</div>
+<div id="bd24956a" class="cell code" data-execution_count="8">
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="output execute_result" data-execution_count="8">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Strategy</th>
+      <th>Campaign</th>
+      <th>Strategy Type</th>
+      <th>Seller</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Spend</th>
+      <th>Sales</th>
+      <th>Quotes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>PubMatic</td>
+      <td>10</td>
+      <td>0</td>
+      <td>$0.02</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Google AdExchange</td>
+      <td>6859</td>
+      <td>0</td>
+      <td>$7.50</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Microsoft Advertising Exchange</td>
+      <td>74</td>
+      <td>0</td>
+      <td>$0.10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Technorati Media</td>
+      <td>7</td>
+      <td>0</td>
+      <td>$0.01</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1-6-2015</td>
+      <td>Audience - Cautious Homeowners</td>
+      <td>Prospecting</td>
+      <td>Audience</td>
+      <td>Ybrant Digital</td>
+      <td>5</td>
+      <td>0</td>
+      <td>$0.01</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>19114</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Google AdExchange</td>
+      <td>962</td>
+      <td>0</td>
+      <td>$1.21</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19115</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>OpenX</td>
+      <td>697</td>
+      <td>1</td>
+      <td>$0.64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19116</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Rubicon</td>
+      <td>2112</td>
+      <td>0</td>
+      <td>$3.02</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19117</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>OnScroll Limited</td>
+      <td>56</td>
+      <td>0</td>
+      <td>$0.11</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19118</th>
+      <td>30-6-2015</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Auto Trader Limited</td>
+      <td>299</td>
+      <td>0</td>
+      <td>$0.64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>19119 rows × 10 columns</p>
+</div>
+</div>
+</div>
+<div id="d8b18f4a" class="cell code" data-execution_count="62">
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 19119 entries, 0 to 19118
+Data columns (total 10 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   Date           19119 non-null  datetime64[ns]
+ 1   Strategy       19119 non-null  object        
+ 2   Campaign       19119 non-null  object        
+ 3   Strategy Type  19119 non-null  object        
+ 4   Seller         19119 non-null  object        
+ 5   Impressions    19119 non-null  int64         
+ 6   Clicks         19119 non-null  int64         
+ 7    Spend         19119 non-null  float64       
+ 8   Sales          19119 non-null  int64         
+ 9   Quotes         19119 non-null  int64         
+dtypes: datetime64[ns](1), float64(1), int64(4), object(4)
+memory usage: 1.5+ MB
+</code></pre>
+</div>
+</div>
+<div id="4b9c3dc4" class="cell code" data-execution_count="9">
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;Date&#39;</span>], <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%d</span><span class="st">-%m-%Y&#39;</span>)</span></code></pre></div>
+</div>
+<div id="dfc07743" class="cell code" data-execution_count="40">
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39; Spend&#39;</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">&#39; Spend&#39;</span>].<span class="bu">str</span>.replace(<span class="st">&#39;$&#39;</span>, <span class="st">&#39;&#39;</span>).<span class="bu">str</span>.strip())</span></code></pre></div>
+</div>
+<div id="441fd6f4" class="cell code" data-execution_count="11">
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code></pre></div>
+<div class="output execute_result" data-execution_count="11">
+<pre><code>Date             datetime64[ns]
+Strategy                 object
+Campaign                 object
+Strategy Type            object
+Seller                   object
+Impressions               int64
+Clicks                    int64
+ Spend                   object
+Sales                     int64
+Quotes                    int64
+dtype: object</code></pre>
+</div>
+</div>
+<div id="ca909c3c" class="cell code" data-execution_count="14">
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="14">
+<pre><code>pandas.core.frame.DataFrame</code></pre>
+</div>
+</div>
+<div id="0bba0e9b" class="cell code" data-execution_count="15">
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Strategy&#39;</span>].unique()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="15">
+<pre><code>array([&#39;Audience - Cautious Homeowners&#39;, &#39;Audience - Demo - Aged 18-24&#39;,
+       &#39;Audience - In Market - Insurance&#39;,
+       &#39;Audience - in-Market - Holidays&#39;, &#39;Audience - Mums&#39;,
+       &#39;Audience Overlap - Car Brand - Ford&#39;,
+       &#39;Audience Overlap - Festival Lovers&#39;,
+       &#39;Audience Overlap - Home Movers&#39;, &#39;Auto - Keywords&#39;,
+       &#39;Brand Keywords&#39;, &#39;Broad Reach&#39;, &#39;eBay&#39;, &#39;Gumtree&#39;,
+       &#39;Homepage 1 Day Recency&#39;, &#39;Homepage 1 Hour Recency&#39;,
+       &#39;Homepage 10 Minute Recency&#39;, &#39;Homepage 1-2 Day Recency&#39;,
+       &#39;Homepage 14 Day Recency&#39;, &#39;Homepage 2-13 Day Recency&#39;,
+       &#39;Homepage Audience Overlay&#39;, &#39;Homepage Performing Domains&#39;,
+       &#39;Homepage Unreached Users&#39;, &#39;Insurance - Keywords&#39;,
+       &#39;Insurance Keywords Audience&#39;, &#39;MoneySupermarket&#39;,
+       &#39;Overlap Domains&#39;, &#39;Performing Domains&#39;, &#39;Performing Geos&#39;,
+       &#39;Performing Keywords&#39;, &#39;Thisismoney&#39;, &#39;Time Of Day&#39;], dtype=object)</code></pre>
+</div>
+</div>
+<div id="9c7b1113" class="cell code" data-execution_count="20">
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(pd.DataFrame)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="20">
+<pre><code>[&#39;T&#39;,
+ &#39;_AXIS_LEN&#39;,
+ &#39;_AXIS_ORDERS&#39;,
+ &#39;_AXIS_TO_AXIS_NUMBER&#39;,
+ &#39;_HANDLED_TYPES&#39;,
+ &#39;__abs__&#39;,
+ &#39;__add__&#39;,
+ &#39;__and__&#39;,
+ &#39;__annotations__&#39;,
+ &#39;__array__&#39;,
+ &#39;__array_priority__&#39;,
+ &#39;__array_ufunc__&#39;,
+ &#39;__arrow_c_stream__&#39;,
+ &#39;__bool__&#39;,
+ &#39;__class__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__copy__&#39;,
+ &#39;__dataframe__&#39;,
+ &#39;__dataframe_consortium_standard__&#39;,
+ &#39;__deepcopy__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__delitem__&#39;,
+ &#39;__dict__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__divmod__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__finalize__&#39;,
+ &#39;__firstlineno__&#39;,
+ &#39;__floordiv__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattr__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getstate__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__iadd__&#39;,
+ &#39;__iand__&#39;,
+ &#39;__ifloordiv__&#39;,
+ &#39;__imod__&#39;,
+ &#39;__imul__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__invert__&#39;,
+ &#39;__ior__&#39;,
+ &#39;__ipow__&#39;,
+ &#39;__isub__&#39;,
+ &#39;__iter__&#39;,
+ &#39;__itruediv__&#39;,
+ &#39;__ixor__&#39;,
+ &#39;__le__&#39;,
+ &#39;__len__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__matmul__&#39;,
+ &#39;__mod__&#39;,
+ &#39;__module__&#39;,
+ &#39;__mul__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__neg__&#39;,
+ &#39;__new__&#39;,
+ &#39;__nonzero__&#39;,
+ &#39;__or__&#39;,
+ &#39;__pandas_priority__&#39;,
+ &#39;__pos__&#39;,
+ &#39;__pow__&#39;,
+ &#39;__radd__&#39;,
+ &#39;__rand__&#39;,
+ &#39;__rdivmod__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__rfloordiv__&#39;,
+ &#39;__rmatmul__&#39;,
+ &#39;__rmod__&#39;,
+ &#39;__rmul__&#39;,
+ &#39;__ror__&#39;,
+ &#39;__round__&#39;,
+ &#39;__rpow__&#39;,
+ &#39;__rsub__&#39;,
+ &#39;__rtruediv__&#39;,
+ &#39;__rxor__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__setitem__&#39;,
+ &#39;__setstate__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__static_attributes__&#39;,
+ &#39;__str__&#39;,
+ &#39;__sub__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;__truediv__&#39;,
+ &#39;__weakref__&#39;,
+ &#39;__xor__&#39;,
+ &#39;_accessors&#39;,
+ &#39;_accum_func&#39;,
+ &#39;_agg_examples_doc&#39;,
+ &#39;_agg_see_also_doc&#39;,
+ &#39;_align_for_op&#39;,
+ &#39;_align_frame&#39;,
+ &#39;_align_series&#39;,
+ &#39;_append&#39;,
+ &#39;_arith_method&#39;,
+ &#39;_arith_method_with_reindex&#39;,
+ &#39;_as_manager&#39;,
+ &#39;_box_col_values&#39;,
+ &#39;_can_fast_transpose&#39;,
+ &#39;_check_inplace_and_allows_duplicate_labels&#39;,
+ &#39;_check_is_chained_assignment_possible&#39;,
+ &#39;_check_label_or_level_ambiguity&#39;,
+ &#39;_check_setitem_copy&#39;,
+ &#39;_clear_item_cache&#39;,
+ &#39;_clip_with_one_bound&#39;,
+ &#39;_clip_with_scalar&#39;,
+ &#39;_cmp_method&#39;,
+ &#39;_combine_frame&#39;,
+ &#39;_consolidate&#39;,
+ &#39;_consolidate_inplace&#39;,
+ &#39;_construct_axes_dict&#39;,
+ &#39;_construct_result&#39;,
+ &#39;_constructor&#39;,
+ &#39;_constructor_from_mgr&#39;,
+ &#39;_constructor_sliced&#39;,
+ &#39;_constructor_sliced_from_mgr&#39;,
+ &#39;_create_data_for_split_and_tight_to_dict&#39;,
+ &#39;_data&#39;,
+ &#39;_deprecate_downcast&#39;,
+ &#39;_dir_additions&#39;,
+ &#39;_dir_deletions&#39;,
+ &#39;_dispatch_frame_op&#39;,
+ &#39;_drop_axis&#39;,
+ &#39;_drop_labels_or_levels&#39;,
+ &#39;_ensure_valid_index&#39;,
+ &#39;_find_valid_index&#39;,
+ &#39;_flex_arith_method&#39;,
+ &#39;_flex_cmp_method&#39;,
+ &#39;_from_arrays&#39;,
+ &#39;_from_mgr&#39;,
+ &#39;_get_agg_axis&#39;,
+ &#39;_get_axis&#39;,
+ &#39;_get_axis_name&#39;,
+ &#39;_get_axis_number&#39;,
+ &#39;_get_axis_resolvers&#39;,
+ &#39;_get_block_manager_axis&#39;,
+ &#39;_get_bool_data&#39;,
+ &#39;_get_cleaned_column_resolvers&#39;,
+ &#39;_get_column_array&#39;,
+ &#39;_get_index_resolvers&#39;,
+ &#39;_get_item_cache&#39;,
+ &#39;_get_label_or_level_values&#39;,
+ &#39;_get_numeric_data&#39;,
+ &#39;_get_value&#39;,
+ &#39;_get_values_for_csv&#39;,
+ &#39;_getitem_bool_array&#39;,
+ &#39;_getitem_multilevel&#39;,
+ &#39;_getitem_nocopy&#39;,
+ &#39;_getitem_slice&#39;,
+ &#39;_gotitem&#39;,
+ &#39;_hidden_attrs&#39;,
+ &#39;_indexed_same&#39;,
+ &#39;_info_axis&#39;,
+ &#39;_info_axis_name&#39;,
+ &#39;_info_axis_number&#39;,
+ &#39;_info_repr&#39;,
+ &#39;_init_mgr&#39;,
+ &#39;_inplace_method&#39;,
+ &#39;_internal_names&#39;,
+ &#39;_internal_names_set&#39;,
+ &#39;_is_copy&#39;,
+ &#39;_is_homogeneous_type&#39;,
+ &#39;_is_label_or_level_reference&#39;,
+ &#39;_is_label_reference&#39;,
+ &#39;_is_level_reference&#39;,
+ &#39;_is_mixed_type&#39;,
+ &#39;_is_view&#39;,
+ &#39;_is_view_after_cow_rules&#39;,
+ &#39;_iset_item&#39;,
+ &#39;_iset_item_mgr&#39;,
+ &#39;_iset_not_inplace&#39;,
+ &#39;_iter_column_arrays&#39;,
+ &#39;_ixs&#39;,
+ &#39;_logical_func&#39;,
+ &#39;_logical_method&#39;,
+ &#39;_maybe_align_series_as_frame&#39;,
+ &#39;_maybe_cache_changed&#39;,
+ &#39;_maybe_update_cacher&#39;,
+ &#39;_metadata&#39;,
+ &#39;_min_count_stat_function&#39;,
+ &#39;_needs_reindex_multi&#39;,
+ &#39;_pad_or_backfill&#39;,
+ &#39;_protect_consolidate&#39;,
+ &#39;_reduce&#39;,
+ &#39;_reduce_axis1&#39;,
+ &#39;_reindex_axes&#39;,
+ &#39;_reindex_multi&#39;,
+ &#39;_reindex_with_indexers&#39;,
+ &#39;_rename&#39;,
+ &#39;_replace_columnwise&#39;,
+ &#39;_repr_data_resource_&#39;,
+ &#39;_repr_fits_horizontal_&#39;,
+ &#39;_repr_fits_vertical_&#39;,
+ &#39;_repr_html_&#39;,
+ &#39;_repr_latex_&#39;,
+ &#39;_reset_cache&#39;,
+ &#39;_reset_cacher&#39;,
+ &#39;_sanitize_column&#39;,
+ &#39;_series&#39;,
+ &#39;_set_axis&#39;,
+ &#39;_set_axis_name&#39;,
+ &#39;_set_axis_nocheck&#39;,
+ &#39;_set_is_copy&#39;,
+ &#39;_set_item&#39;,
+ &#39;_set_item_frame_value&#39;,
+ &#39;_set_item_mgr&#39;,
+ &#39;_set_value&#39;,
+ &#39;_setitem_array&#39;,
+ &#39;_setitem_frame&#39;,
+ &#39;_setitem_slice&#39;,
+ &#39;_shift_with_freq&#39;,
+ &#39;_should_reindex_frame_op&#39;,
+ &#39;_slice&#39;,
+ &#39;_stat_function&#39;,
+ &#39;_stat_function_ddof&#39;,
+ &#39;_take_with_is_copy&#39;,
+ &#39;_to_dict_of_blocks&#39;,
+ &#39;_to_latex_via_styler&#39;,
+ &#39;_typ&#39;,
+ &#39;_update_inplace&#39;,
+ &#39;_validate_dtype&#39;,
+ &#39;_values&#39;,
+ &#39;_where&#39;,
+ &#39;abs&#39;,
+ &#39;add&#39;,
+ &#39;add_prefix&#39;,
+ &#39;add_suffix&#39;,
+ &#39;agg&#39;,
+ &#39;aggregate&#39;,
+ &#39;align&#39;,
+ &#39;all&#39;,
+ &#39;any&#39;,
+ &#39;apply&#39;,
+ &#39;applymap&#39;,
+ &#39;asfreq&#39;,
+ &#39;asof&#39;,
+ &#39;assign&#39;,
+ &#39;astype&#39;,
+ &#39;at&#39;,
+ &#39;at_time&#39;,
+ &#39;attrs&#39;,
+ &#39;axes&#39;,
+ &#39;backfill&#39;,
+ &#39;between_time&#39;,
+ &#39;bfill&#39;,
+ &#39;bool&#39;,
+ &#39;boxplot&#39;,
+ &#39;clip&#39;,
+ &#39;columns&#39;,
+ &#39;combine&#39;,
+ &#39;combine_first&#39;,
+ &#39;compare&#39;,
+ &#39;convert_dtypes&#39;,
+ &#39;copy&#39;,
+ &#39;corr&#39;,
+ &#39;corrwith&#39;,
+ &#39;count&#39;,
+ &#39;cov&#39;,
+ &#39;cummax&#39;,
+ &#39;cummin&#39;,
+ &#39;cumprod&#39;,
+ &#39;cumsum&#39;,
+ &#39;describe&#39;,
+ &#39;diff&#39;,
+ &#39;div&#39;,
+ &#39;divide&#39;,
+ &#39;dot&#39;,
+ &#39;drop&#39;,
+ &#39;drop_duplicates&#39;,
+ &#39;droplevel&#39;,
+ &#39;dropna&#39;,
+ &#39;dtypes&#39;,
+ &#39;duplicated&#39;,
+ &#39;empty&#39;,
+ &#39;eq&#39;,
+ &#39;equals&#39;,
+ &#39;eval&#39;,
+ &#39;ewm&#39;,
+ &#39;expanding&#39;,
+ &#39;explode&#39;,
+ &#39;ffill&#39;,
+ &#39;fillna&#39;,
+ &#39;filter&#39;,
+ &#39;first&#39;,
+ &#39;first_valid_index&#39;,
+ &#39;flags&#39;,
+ &#39;floordiv&#39;,
+ &#39;from_dict&#39;,
+ &#39;from_records&#39;,
+ &#39;ge&#39;,
+ &#39;get&#39;,
+ &#39;groupby&#39;,
+ &#39;gt&#39;,
+ &#39;head&#39;,
+ &#39;hist&#39;,
+ &#39;iat&#39;,
+ &#39;idxmax&#39;,
+ &#39;idxmin&#39;,
+ &#39;iloc&#39;,
+ &#39;index&#39;,
+ &#39;infer_objects&#39;,
+ &#39;info&#39;,
+ &#39;insert&#39;,
+ &#39;interpolate&#39;,
+ &#39;isetitem&#39;,
+ &#39;isin&#39;,
+ &#39;isna&#39;,
+ &#39;isnull&#39;,
+ &#39;items&#39;,
+ &#39;iterrows&#39;,
+ &#39;itertuples&#39;,
+ &#39;join&#39;,
+ &#39;keys&#39;,
+ &#39;kurt&#39;,
+ &#39;kurtosis&#39;,
+ &#39;last&#39;,
+ &#39;last_valid_index&#39;,
+ &#39;le&#39;,
+ &#39;loc&#39;,
+ &#39;lt&#39;,
+ &#39;map&#39;,
+ &#39;mask&#39;,
+ &#39;max&#39;,
+ &#39;mean&#39;,
+ &#39;median&#39;,
+ &#39;melt&#39;,
+ &#39;memory_usage&#39;,
+ &#39;merge&#39;,
+ &#39;min&#39;,
+ &#39;mod&#39;,
+ &#39;mode&#39;,
+ &#39;mul&#39;,
+ &#39;multiply&#39;,
+ &#39;ndim&#39;,
+ &#39;ne&#39;,
+ &#39;nlargest&#39;,
+ &#39;notna&#39;,
+ &#39;notnull&#39;,
+ &#39;nsmallest&#39;,
+ &#39;nunique&#39;,
+ &#39;pad&#39;,
+ &#39;pct_change&#39;,
+ &#39;pipe&#39;,
+ &#39;pivot&#39;,
+ &#39;pivot_table&#39;,
+ &#39;plot&#39;,
+ &#39;pop&#39;,
+ &#39;pow&#39;,
+ &#39;prod&#39;,
+ &#39;product&#39;,
+ &#39;quantile&#39;,
+ &#39;query&#39;,
+ &#39;radd&#39;,
+ &#39;rank&#39;,
+ &#39;rdiv&#39;,
+ &#39;reindex&#39;,
+ &#39;reindex_like&#39;,
+ &#39;rename&#39;,
+ &#39;rename_axis&#39;,
+ &#39;reorder_levels&#39;,
+ &#39;replace&#39;,
+ &#39;resample&#39;,
+ &#39;reset_index&#39;,
+ &#39;rfloordiv&#39;,
+ &#39;rmod&#39;,
+ &#39;rmul&#39;,
+ &#39;rolling&#39;,
+ &#39;round&#39;,
+ &#39;rpow&#39;,
+ &#39;rsub&#39;,
+ &#39;rtruediv&#39;,
+ &#39;sample&#39;,
+ &#39;select_dtypes&#39;,
+ &#39;sem&#39;,
+ &#39;set_axis&#39;,
+ &#39;set_flags&#39;,
+ &#39;set_index&#39;,
+ &#39;shape&#39;,
+ &#39;shift&#39;,
+ &#39;size&#39;,
+ &#39;skew&#39;,
+ &#39;sort_index&#39;,
+ &#39;sort_values&#39;,
+ &#39;sparse&#39;,
+ &#39;squeeze&#39;,
+ &#39;stack&#39;,
+ &#39;std&#39;,
+ &#39;style&#39;,
+ &#39;sub&#39;,
+ &#39;subtract&#39;,
+ &#39;sum&#39;,
+ &#39;swapaxes&#39;,
+ &#39;swaplevel&#39;,
+ &#39;tail&#39;,
+ &#39;take&#39;,
+ &#39;to_clipboard&#39;,
+ &#39;to_csv&#39;,
+ &#39;to_dict&#39;,
+ &#39;to_excel&#39;,
+ &#39;to_feather&#39;,
+ &#39;to_gbq&#39;,
+ &#39;to_hdf&#39;,
+ &#39;to_html&#39;,
+ &#39;to_json&#39;,
+ &#39;to_latex&#39;,
+ &#39;to_markdown&#39;,
+ &#39;to_numpy&#39;,
+ &#39;to_orc&#39;,
+ &#39;to_parquet&#39;,
+ &#39;to_period&#39;,
+ &#39;to_pickle&#39;,
+ &#39;to_records&#39;,
+ &#39;to_sql&#39;,
+ &#39;to_stata&#39;,
+ &#39;to_string&#39;,
+ &#39;to_timestamp&#39;,
+ &#39;to_xarray&#39;,
+ &#39;to_xml&#39;,
+ &#39;transform&#39;,
+ &#39;transpose&#39;,
+ &#39;truediv&#39;,
+ &#39;truncate&#39;,
+ &#39;tz_convert&#39;,
+ &#39;tz_localize&#39;,
+ &#39;unstack&#39;,
+ &#39;update&#39;,
+ &#39;value_counts&#39;,
+ &#39;values&#39;,
+ &#39;var&#39;,
+ &#39;where&#39;,
+ &#39;xs&#39;]</code></pre>
+</div>
+</div>
+<div id="1020a1f1" class="cell code" data-execution_count="21">
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Strategy&#39;</span>].value_counts()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="21">
+<pre><code>Strategy
+Homepage 2-13 Day Recency              1933
+Homepage 14 Day Recency                1918
+Homepage Unreached Users               1778
+Insurance Keywords Audience            1605
+Gumtree                                1587
+Audience - In Market - Insurance       1326
+Homepage 1 Day Recency                 1236
+Audience - in-Market - Holidays        1215
+Homepage 1-2 Day Recency               1028
+Audience - Demo - Aged 18-24            700
+Audience Overlap - Home Movers          617
+Homepage 1 Hour Recency                 522
+Time Of Day                             517
+Audience Overlap - Festival Lovers      512
+MoneySupermarket                        389
+Audience Overlap - Car Brand - Ford     366
+Audience - Mums                         304
+Broad Reach                             247
+Homepage Performing Domains             246
+Performing Geos                         229
+Performing Keywords                     191
+Overlap Domains                         163
+Auto - Keywords                         135
+Homepage 10 Minute Recency               94
+Audience - Cautious Homeowners           83
+Thisismoney                              54
+Performing Domains                       48
+Homepage Audience Overlay                29
+eBay                                     27
+Insurance - Keywords                     17
+Brand Keywords                            3
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="caec8488" class="cell code" data-execution_count="22">
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Strategy Type&#39;</span>].unique()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="22">
+<pre><code>array([&#39;Audience&#39;, &#39;Context&#39;, &#39;Reach&#39;, &#39;Retargeting&#39;], dtype=object)</code></pre>
+</div>
+</div>
+<div id="d97e5452" class="cell code" data-execution_count="23">
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Strategy Type&#39;</span>].value_counts()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="23">
+<pre><code>Strategy Type
+Retargeting    8784
+Audience       6728
+Context        2614
+Reach           993
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="02fe82e2" class="cell code" data-execution_count="24">
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Seller&#39;</span>].unique()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="24">
+<pre><code>array([&#39;PubMatic&#39;, &#39;Google AdExchange&#39;, &#39;Microsoft Advertising Exchange&#39;,
+       &#39;Technorati Media&#39;, &#39;Ybrant Digital&#39;, &#39;OpenX&#39;, &#39;Rubicon&#39;,
+       &#39;Unanimis Consulting Limited&#39;, &#39;TLV Media Online Ltd&#39;, &#39;AdExtent&#39;,
+       &#39;Yellowhammer Media Group Inc.&#39;,
+       &#39;Global Digital Markets (Ve Interactive)&#39;, &#39;Admetrics Media Ltd&#39;,
+       &#39;OnScroll Limited&#39;, &#39;Switch Concepts Limited&#39;, &#39;AOL Marketplace&#39;,
+       &#39;PulsePoint, Inc.&#39;, &#39;Improve Digital&#39;, &#39;bRealTime (select)&#39;,
+       &#39;Sovrn&#39;, &#39;Adtegrity&#39;, &#39;Lifestreet&#39;, &#39;Criteo&#39;,
+       &#39;The Publisher Trading Desk Ltd.&#39;, &#39;Admeta AB&#39;, &#39;Defy Media&#39;,
+       &#39;District M&#39;, &#39;Protein UK Limited&#39;, &#39;Dakine Media LLC&#39;,
+       &#39;Green Light Media, Inc&#39;, &#39;Programmatic s.r.o.&#39;,
+       &#39;24/7 Media France&#39;, &#39;MonPar B.V.&#39;, &#39;Brightcom Media&#39;,
+       &#39;AD2ONE LTD&#39;, &#39;Metric Science&#39;, &#39;The Blogger Network&#39;,
+       &#39;Yamaka Media Group Ltd&#39;, &#39;Kyston&#39;, &#39;Auto Trader Limited&#39;,
+       &#39;Adshoard Premium&#39;, &#39;33Across Real Display&#39;, &#39;CrimTan&#39;,
+       &#39;UnderDog Media&#39;, &#39;Bandsintown Amplified&#39;,
+       &#39;Adperium BV - Performance&#39;, &#39;Generation Premium, Inc.&#39;,
+       &#39;Geniee, Inc.&#39;, &#39;Time Inc. (UK) Ltd&#39;, &#39;S&amp;W Ltd.&#39;,
+       &#39;Youla Media LLP&#39;, &#39;LinkedIn Corporation&#39;, &#39;MetaNetwork&#39;,
+       &#39;Collective Exchange (UK)&#39;, &#39;Say Media, Inc.&#39;, &#39;AdConductor&#39;,
+       &#39;Orbit Interactive&#39;, &#39;PLYMedia&#39;, &#39;Schibsted Classifieds&#39;,
+       &quot;D&#39;Arriens Mobile&quot;, &#39;AdMetrics Media Ltd Premium Exchange&#39;,
+       &#39;PremiumCPM LLC&#39;, &#39;MCN&#39;, &#39;Vibrant Media Inc.&#39;,
+       &#39;MediaShakers - Mobile&#39;, &#39;Alveo&#39;, &#39;Premio&#39;,
+       &#39;FireBringer Media - Premium&#39;, &#39;Crazy4Media Online Ltd.&#39;,
+       &#39;Traffiq Exchange Performance&#39;, &#39;Kickads SRL&#39;, &#39;Vexigo Ltd&#39;,
+       &#39;Affinity.com&#39;, &#39;Ambient Digital Pte Limited&#39;, &quot;D&#39;Arriens&quot;,
+       &#39;The Edge Initiative&#39;, &#39;Adversal.com&#39;, &#39;Gourmet Ads Pty Limited&#39;,
+       &#39;Brandmatic&#39;, &#39;Medialysiz Solutions Private Limited&#39;, &#39;Wilcom LLC&#39;,
+       &#39;Digital Throttle&#39;, &#39;Chitika, Inc.&#39;, &#39;Gorilla Nation Media, LLC&#39;,
+       &#39;Waypoint Media&#39;, &#39;WEB3 LTD&#39;, &#39;Woodtale Technology Inc&#39;,
+       &#39;Profound&#39;, &#39;Meridian Tech Pte Ltd&#39;, &#39;Semilo B.V.&#39;,
+       &#39;Local World Limited&#39;, &#39;Digitize&#39;, &#39;Up-value GmbH&#39;,
+       &#39;Cyber C.S.G Group Soft Ltd&#39;, &#39;WebAds NL&#39;, &#39;Media White&#39;,
+       &#39;Engage:BDR&#39;, &#39;Hoopla&#39;, &#39;Social Game Media LLC&#39;,
+       &#39;Pub Ventures Media Corp&#39;, &#39;Local Yokel&#39;, &#39;RTB Media&#39;, &#39;Hi-Media&#39;,
+       &#39;Orange Ad Market (France)&#39;, &#39;AnyClip Media, Ltd.&#39;,
+       &#39;Matchflow Media&#39;, &#39;Heights Media&#39;, &#39;Conversant, Inc&#39;,
+       &#39;TailWind 3&#39;, &#39;Key Download LTD&#39;, &#39;MeetMe Inc.&#39;,
+       &#39;J Carter Marketing Inc&#39;, &#39;Suite66 Select&#39;, &#39;Adtomatik&#39;,
+       &#39;Xaxis - Philippines&#39;, &#39;N&amp;S Plus&#39;,
+       &#39;Merriam-Webster, Incorporated, a Delaware Corporation&#39;,
+       &#39;WebAds IT&#39;, &#39;Batanga Media Exchange&#39;, &#39;Riot New Media Group&#39;,
+       &#39;Shareaholic, Inc.&#39;, &#39;Antevenio S.A.&#39;,
+       &#39;Canadian Programmatic Marketplace&#39;, &#39;WayMedia S.A.&#39;, &#39;Perion&#39;,
+       &#39;Aim4Media BV&#39;, &#39;AdGlance&#39;, &#39;NetSeer Inc&#39;, &#39;Uber AdMedia&#39;,
+       &#39;Sonobi - Premium&#39;, &#39;Adhub Limited&#39;, &#39;Httpool&#39;, &#39;VertaMedia LLC&#39;,
+       &#39;Stailamedia AG&#39;, &#39;ReachJunction Media Limited&#39;,
+       &#39;Internet Brands Inc.&#39;, &#39;152 Media Select&#39;, &#39;Webisaba Select&#39;,
+       &#39;Tightrope Interactive&#39;, &#39;Woven Digital LLC&#39;,
+       &#39;Xaxis - US Marketplace&#39;, &#39;Clique Media FZ LLC&#39;, &#39;Fidelity Media&#39;,
+       &#39;Xaxis - Canada Marketplace&#39;, &#39;Hypercentage Ltd.&#39;, &#39;MyLikes Inc.&#39;,
+       &#39;playbuzz Ltd.&#39;, &#39;Specific Media&#39;, &#39;HotChalk, Inc.&#39;,
+       &#39;Branovate Ltd&#39;, &#39;Mth Sense Inc&#39;, &#39;Yellow Pages Group&#39;,
+       &#39;Digimosaic, Inc.&#39;, &#39;Local Corporation&#39;, &#39;Altitude Digital Select&#39;,
+       &#39;Adorika Media Ltd - Premium&#39;, &#39;Purch&#39;, &#39;The Globe and Mail Inc.&#39;,
+       &#39;Adhood&#39;, &#39;Facebook&#39;, &#39;Ad.net, Inc.&#39;,
+       &#39;Capslock Digital Solutions Pvt. Ltd.&#39;], dtype=object)</code></pre>
+</div>
+</div>
+<div id="c24f5907" class="cell code" data-execution_count="25">
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Seller&#39;</span>].nunique()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="25">
+<pre><code>162</code></pre>
+</div>
+</div>
+<div id="0fdc3567" class="cell code" data-execution_count="28">
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Seller&#39;</span>].value_counts().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">20</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="28">
+<pre><code>Seller
+Google AdExchange                 667
+Rubicon                           641
+OpenX                             623
+OnScroll Limited                  489
+Auto Trader Limited               480
+Microsoft Advertising Exchange    479
+AOL Marketplace                   440
+AD2ONE LTD                        402
+Switch Concepts Limited           387
+Improve Digital                   365
+Yellowhammer Media Group Inc.     356
+Technorati Media                  354
+TLV Media Online Ltd              332
+District M                        329
+Metric Science                    311
+Sovrn                             307
+Unanimis Consulting Limited       271
+Ybrant Digital                    270
+AdExtent                          269
+Vibrant Media Inc.                264
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="bb27854e" class="cell code" data-execution_count="29">
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;Seller&#39;</span>].value_counts().sort_values(ascending<span class="op">=</span><span class="va">False</span>).tail(<span class="dv">20</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="29">
+<pre><code>Seller
+Branovate Ltd                                            4
+Adtomatik                                                3
+Webisaba Select                                          3
+Fidelity Media                                           3
+Altitude Digital Select                                  3
+Ad.net, Inc.                                             2
+playbuzz Ltd.                                            2
+Tightrope Interactive                                    2
+Adhood                                                   2
+The Globe and Mail Inc.                                  2
+Merriam-Webster, Incorporated, a Delaware Corporation    1
+ReachJunction Media Limited                              1
+MyLikes Inc.                                             1
+Clique Media FZ LLC                                      1
+Specific Media                                           1
+Yellow Pages Group                                       1
+Local Corporation                                        1
+Adorika Media Ltd - Premium                              1
+Purch                                                    1
+Capslock Digital Solutions Pvt. Ltd.                     1
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="2dae3ee3" class="cell code" data-execution_count="35">
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">&#39;Seller&#39;</span>,<span class="st">&#39; Spend&#39;</span>]].sort_values(by<span class="op">=</span><span class="st">&#39; Spend&#39;</span>,ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="35">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seller</th>
+      <th>Spend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5277</th>
+      <td>AOL Marketplace</td>
+      <td>$91.52</td>
+    </tr>
+    <tr>
+      <th>17470</th>
+      <td>Google AdExchange</td>
+      <td>$9.98</td>
+    </tr>
+    <tr>
+      <th>17527</th>
+      <td>Google AdExchange</td>
+      <td>$9.97</td>
+    </tr>
+    <tr>
+      <th>10286</th>
+      <td>Google AdExchange</td>
+      <td>$9.96</td>
+    </tr>
+    <tr>
+      <th>12591</th>
+      <td>Google AdExchange</td>
+      <td>$9.95</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>14349</th>
+      <td>Ambient Digital Pte Limited</td>
+      <td>$0.00</td>
+    </tr>
+    <tr>
+      <th>6233</th>
+      <td>Orbit Interactive</td>
+      <td>$0.00</td>
+    </tr>
+    <tr>
+      <th>6232</th>
+      <td>Admeta AB</td>
+      <td>$0.00</td>
+    </tr>
+    <tr>
+      <th>6230</th>
+      <td>Adtegrity</td>
+      <td>$0.00</td>
+    </tr>
+    <tr>
+      <th>15405</th>
+      <td>J Carter Marketing Inc</td>
+      <td>$0.00</td>
+    </tr>
+  </tbody>
+</table>
+<p>19119 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="d278ab11" class="cell code" data-execution_count="42">
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>top_seller_by_spend<span class="op">=</span>df.groupby(<span class="st">&#39;Seller&#39;</span>).agg({<span class="st">&#39; Spend&#39;</span>:<span class="st">&#39;sum&#39;</span>})</span></code></pre></div>
+</div>
+<div id="38214d13" class="cell code" data-execution_count="46">
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>top_seller_by_spend.sort_values(by<span class="op">=</span><span class="st">&#39; Spend&#39;</span>,ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">20</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="46">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Spend</th>
+    </tr>
+    <tr>
+      <th>Seller</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Google AdExchange</th>
+      <td>6214.83</td>
+    </tr>
+    <tr>
+      <th>Rubicon</th>
+      <td>4789.00</td>
+    </tr>
+    <tr>
+      <th>OpenX</th>
+      <td>4148.00</td>
+    </tr>
+    <tr>
+      <th>AOL Marketplace</th>
+      <td>1808.67</td>
+    </tr>
+    <tr>
+      <th>Facebook</th>
+      <td>854.64</td>
+    </tr>
+    <tr>
+      <th>Microsoft Advertising Exchange</th>
+      <td>675.39</td>
+    </tr>
+    <tr>
+      <th>OnScroll Limited</th>
+      <td>352.71</td>
+    </tr>
+    <tr>
+      <th>Auto Trader Limited</th>
+      <td>281.72</td>
+    </tr>
+    <tr>
+      <th>Switch Concepts Limited</th>
+      <td>217.75</td>
+    </tr>
+    <tr>
+      <th>PulsePoint, Inc.</th>
+      <td>108.11</td>
+    </tr>
+    <tr>
+      <th>TLV Media Online Ltd</th>
+      <td>67.12</td>
+    </tr>
+    <tr>
+      <th>Yellowhammer Media Group Inc.</th>
+      <td>56.50</td>
+    </tr>
+    <tr>
+      <th>PubMatic</th>
+      <td>45.10</td>
+    </tr>
+    <tr>
+      <th>Key Download LTD</th>
+      <td>42.06</td>
+    </tr>
+    <tr>
+      <th>AD2ONE LTD</th>
+      <td>37.25</td>
+    </tr>
+    <tr>
+      <th>Technorati Media</th>
+      <td>26.32</td>
+    </tr>
+    <tr>
+      <th>Improve Digital</th>
+      <td>25.78</td>
+    </tr>
+    <tr>
+      <th>bRealTime (select)</th>
+      <td>20.89</td>
+    </tr>
+    <tr>
+      <th>Sovrn</th>
+      <td>17.50</td>
+    </tr>
+    <tr>
+      <th>Admetrics Media Ltd</th>
+      <td>15.12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="747b951d" class="cell code" data-execution_count="48">
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df.groupby(<span class="st">&#39;Seller&#39;</span>)[[<span class="st">&#39; Spend&#39;</span>, <span class="st">&#39;Sales&#39;</span>, <span class="st">&#39;Impressions&#39;</span>, <span class="st">&#39;Clicks&#39;</span>, <span class="st">&#39;Quotes&#39;</span>]].<span class="bu">sum</span>()</span></code></pre></div>
+</div>
+<div id="f4b20e40" class="cell code" data-execution_count="50">
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df1.sort_values(by<span class="op">=</span>[<span class="st">&#39; Spend&#39;</span>,<span class="st">&#39;Sales&#39;</span>,<span class="st">&#39;Impressions&#39;</span>,<span class="st">&#39;Clicks&#39;</span>,<span class="st">&#39;Quotes&#39;</span>],ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="50">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Spend</th>
+      <th>Sales</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Quotes</th>
+    </tr>
+    <tr>
+      <th>Seller</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Google AdExchange</th>
+      <td>6214.83</td>
+      <td>9</td>
+      <td>2563336</td>
+      <td>815</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>Rubicon</th>
+      <td>4789.00</td>
+      <td>1</td>
+      <td>1687088</td>
+      <td>507</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>OpenX</th>
+      <td>4148.00</td>
+      <td>7</td>
+      <td>2419543</td>
+      <td>589</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>AOL Marketplace</th>
+      <td>1808.67</td>
+      <td>1</td>
+      <td>1215344</td>
+      <td>616</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>Facebook</th>
+      <td>854.64</td>
+      <td>0</td>
+      <td>262014</td>
+      <td>199</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Microsoft Advertising Exchange</th>
+      <td>675.39</td>
+      <td>6</td>
+      <td>113751</td>
+      <td>101</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>OnScroll Limited</th>
+      <td>352.71</td>
+      <td>2</td>
+      <td>180988</td>
+      <td>165</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>Auto Trader Limited</th>
+      <td>281.72</td>
+      <td>7</td>
+      <td>111992</td>
+      <td>50</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>Switch Concepts Limited</th>
+      <td>217.75</td>
+      <td>1</td>
+      <td>112625</td>
+      <td>57</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>PulsePoint, Inc.</th>
+      <td>108.11</td>
+      <td>1</td>
+      <td>84772</td>
+      <td>9</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="fa88e3cb" class="cell code" data-execution_count="51">
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.groupby(<span class="st">&#39;Strategy&#39;</span>)[[<span class="st">&#39; Spend&#39;</span>, <span class="st">&#39;Sales&#39;</span>, <span class="st">&#39;Impressions&#39;</span>, <span class="st">&#39;Clicks&#39;</span>, <span class="st">&#39;Quotes&#39;</span>]].<span class="bu">sum</span>()</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df2.sort_values(by<span class="op">=</span>[<span class="st">&#39; Spend&#39;</span>,<span class="st">&#39;Sales&#39;</span>,<span class="st">&#39;Impressions&#39;</span>,<span class="st">&#39;Clicks&#39;</span>,<span class="st">&#39;Quotes&#39;</span>],ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="51">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Spend</th>
+      <th>Sales</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Quotes</th>
+    </tr>
+    <tr>
+      <th>Strategy</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Gumtree</th>
+      <td>4017.35</td>
+      <td>14</td>
+      <td>3140256</td>
+      <td>580</td>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>Broad Reach</th>
+      <td>3067.63</td>
+      <td>4</td>
+      <td>2424892</td>
+      <td>913</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>Homepage 2-13 Day Recency</th>
+      <td>2533.92</td>
+      <td>9</td>
+      <td>423827</td>
+      <td>315</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <th>Homepage 14 Day Recency</th>
+      <td>2393.03</td>
+      <td>17</td>
+      <td>670979</td>
+      <td>330</td>
+      <td>115</td>
+    </tr>
+    <tr>
+      <th>Homepage 1 Day Recency</th>
+      <td>1380.12</td>
+      <td>8</td>
+      <td>155666</td>
+      <td>156</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>Homepage Unreached Users</th>
+      <td>1373.22</td>
+      <td>28</td>
+      <td>462925</td>
+      <td>215</td>
+      <td>139</td>
+    </tr>
+    <tr>
+      <th>Homepage Audience Overlay</th>
+      <td>854.64</td>
+      <td>0</td>
+      <td>262014</td>
+      <td>199</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Homepage 1-2 Day Recency</th>
+      <td>731.10</td>
+      <td>10</td>
+      <td>89712</td>
+      <td>82</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>Insurance Keywords Audience</th>
+      <td>622.15</td>
+      <td>1</td>
+      <td>259108</td>
+      <td>65</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>Homepage 1 Hour Recency</th>
+      <td>431.72</td>
+      <td>2</td>
+      <td>37232</td>
+      <td>31</td>
+      <td>24</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="a4cfce7c" class="cell code" data-execution_count="52">
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.groupby(<span class="st">&#39;Strategy Type&#39;</span>)[[<span class="st">&#39; Spend&#39;</span>, <span class="st">&#39;Sales&#39;</span>, <span class="st">&#39;Impressions&#39;</span>, <span class="st">&#39;Clicks&#39;</span>, <span class="st">&#39;Quotes&#39;</span>]].<span class="bu">sum</span>()</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>df2.sort_values(by<span class="op">=</span>[<span class="st">&#39; Spend&#39;</span>,<span class="st">&#39;Sales&#39;</span>,<span class="st">&#39;Impressions&#39;</span>,<span class="st">&#39;Clicks&#39;</span>,<span class="st">&#39;Quotes&#39;</span>],ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="52">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Spend</th>
+      <th>Sales</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Quotes</th>
+    </tr>
+    <tr>
+      <th>Strategy Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Retargeting</th>
+      <td>9997.64</td>
+      <td>79</td>
+      <td>2144499</td>
+      <td>1379</td>
+      <td>495</td>
+    </tr>
+    <tr>
+      <th>Context</th>
+      <td>4925.29</td>
+      <td>20</td>
+      <td>3315539</td>
+      <td>678</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>Reach</th>
+      <td>3438.12</td>
+      <td>10</td>
+      <td>2823140</td>
+      <td>1306</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>Audience</th>
+      <td>1631.25</td>
+      <td>15</td>
+      <td>847800</td>
+      <td>215</td>
+      <td>394</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="7a88630c" class="cell code" data-execution_count="59">
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">&#39;Strategy&#39;</span>,<span class="st">&#39;Strategy Type&#39;</span>]).get_group((<span class="st">&#39;Time Of Day&#39;</span>, <span class="st">&#39;Reach&#39;</span>))</span></code></pre></div>
+<div class="output execute_result" data-execution_count="59">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Strategy</th>
+      <th>Campaign</th>
+      <th>Strategy Type</th>
+      <th>Seller</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Spend</th>
+      <th>Sales</th>
+      <th>Quotes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>18602</th>
+      <td>2015-06-01</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>PubMatic</td>
+      <td>2952</td>
+      <td>1</td>
+      <td>2.63</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18603</th>
+      <td>2015-06-01</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Technorati Media</td>
+      <td>1097</td>
+      <td>1</td>
+      <td>0.75</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18604</th>
+      <td>2015-06-01</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Yellowhammer Media Group Inc.</td>
+      <td>1215</td>
+      <td>3</td>
+      <td>1.11</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18605</th>
+      <td>2015-06-01</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Switch Concepts Limited</td>
+      <td>4694</td>
+      <td>4</td>
+      <td>3.05</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18606</th>
+      <td>2015-06-01</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>AOL Marketplace</td>
+      <td>4837</td>
+      <td>3</td>
+      <td>4.72</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>19114</th>
+      <td>2015-06-30</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Google AdExchange</td>
+      <td>962</td>
+      <td>0</td>
+      <td>1.21</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19115</th>
+      <td>2015-06-30</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>OpenX</td>
+      <td>697</td>
+      <td>1</td>
+      <td>0.64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19116</th>
+      <td>2015-06-30</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Rubicon</td>
+      <td>2112</td>
+      <td>0</td>
+      <td>3.02</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19117</th>
+      <td>2015-06-30</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>OnScroll Limited</td>
+      <td>56</td>
+      <td>0</td>
+      <td>0.11</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19118</th>
+      <td>2015-06-30</td>
+      <td>Time Of Day</td>
+      <td>Prospecting</td>
+      <td>Reach</td>
+      <td>Auto Trader Limited</td>
+      <td>299</td>
+      <td>0</td>
+      <td>0.64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>517 rows × 10 columns</p>
+</div>
+</div>
+</div>
+<div id="346177c9" class="cell code" data-execution_count="60">
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">&#39;Strategy&#39;</span>,<span class="st">&#39;Strategy Type&#39;</span>]).size()</span></code></pre></div>
+<div class="output execute_result" data-execution_count="60">
+<pre><code>Strategy                             Strategy Type
+Audience - Cautious Homeowners       Audience           83
+Audience - Demo - Aged 18-24         Audience          700
+Audience - In Market - Insurance     Audience         1326
+Audience - Mums                      Audience          304
+Audience - in-Market - Holidays      Audience         1215
+Audience Overlap - Car Brand - Ford  Audience          366
+Audience Overlap - Festival Lovers   Audience          512
+Audience Overlap - Home Movers       Audience          617
+Auto - Keywords                      Context           135
+Brand Keywords                       Context             3
+Broad Reach                          Reach             247
+Gumtree                              Context          1587
+Homepage 1 Day Recency               Retargeting      1236
+Homepage 1 Hour Recency              Retargeting       522
+Homepage 1-2 Day Recency             Retargeting      1028
+Homepage 10 Minute Recency           Retargeting        94
+Homepage 14 Day Recency              Retargeting      1918
+Homepage 2-13 Day Recency            Retargeting      1933
+Homepage Audience Overlay            Retargeting        29
+Homepage Performing Domains          Retargeting       246
+Homepage Unreached Users             Retargeting      1778
+Insurance - Keywords                 Context            17
+Insurance Keywords Audience          Audience         1605
+MoneySupermarket                     Context           389
+Overlap Domains                      Context           163
+Performing Domains                   Context            48
+Performing Geos                      Reach             229
+Performing Keywords                  Context           191
+Thisismoney                          Context            54
+Time Of Day                          Reach             517
+eBay                                 Context            27
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="a35f550f" class="cell code" data-execution_count="61">
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df2.index</span></code></pre></div>
+<div class="output execute_result" data-execution_count="61">
+<pre><code>Index([&#39;Audience&#39;, &#39;Context&#39;, &#39;Reach&#39;, &#39;Retargeting&#39;], dtype=&#39;object&#39;, name=&#39;Strategy Type&#39;)</code></pre>
+</div>
+</div>
+<div id="ac76fc0a" class="cell code" data-execution_count="67">
+<div class="sourceCode" id="cb46"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>d1<span class="op">=</span>df.groupby(<span class="st">&#39;Campaign&#39;</span>)[[<span class="st">&quot;Impressions&quot;</span>,<span class="st">&quot;Clicks&quot;</span>,<span class="st">&quot;Quotes&quot;</span>,<span class="st">&quot;Sales&quot;</span>,<span class="st">&quot; Spend&quot;</span>]].<span class="bu">sum</span>()</span></code></pre></div>
+</div>
+<div id="e5a454c8" class="cell code" data-execution_count="68">
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>d1</span></code></pre></div>
+<div class="output execute_result" data-execution_count="68">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Quotes</th>
+      <th>Sales</th>
+      <th>Spend</th>
+    </tr>
+    <tr>
+      <th>Campaign</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Prospecting</th>
+      <td>6986479</td>
+      <td>2199</td>
+      <td>579</td>
+      <td>45</td>
+      <td>9994.66</td>
+    </tr>
+    <tr>
+      <th>Retargeting</th>
+      <td>2144499</td>
+      <td>1379</td>
+      <td>495</td>
+      <td>79</td>
+      <td>9997.64</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="a6e2717b" class="cell code" data-execution_count="70">
+<div class="sourceCode" id="cb48"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>d1[<span class="st">&#39;CPA&#39;</span>]<span class="op">=</span>d1[<span class="st">&#39; Spend&#39;</span>]<span class="op">/</span>d1[<span class="st">&#39;Sales&#39;</span>]</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>d1[<span class="st">&#39;CPM&#39;</span>]<span class="op">=</span>(d1[<span class="st">&#39; Spend&#39;</span>]<span class="op">/</span>d1[<span class="st">&#39;Impressions&#39;</span>])<span class="op">*</span><span class="dv">1000</span></span></code></pre></div>
+</div>
+<div id="47b92d1c" class="cell markdown">
+<h2 id="brain-part-1--explaining-the-task-using-the-star-framework">🧠
+Part 1 — Explaining the Task Using the <strong>STAR
+Framework</strong></h2>
+<blockquote>
+<p>🎯 Goal: Demonstrate analytical thinking + clear communication</p>
+</blockquote>
+<hr />
+<h3 id="s--situation"><strong>S — Situation</strong></h3>
+<blockquote>
+<p>“I was given a dataset containing performance data for multiple ad
+campaigns, including metrics like impressions, clicks, quotes, spend,
+and sales. The goal was to evaluate how different campaign types —
+<em>Prospecting</em> and <em>Retargeting</em> — performed overall.”</p>
+</blockquote>
+<p>💬 (This sets the business context clearly — that you’re analyzing
+campaign efficiency.)</p>
+<hr />
+<h3 id="t--task"><strong>T — Task</strong></h3>
+<blockquote>
+<p>“My task was to aggregate the data by campaign and compute key
+performance metrics like <strong>CPA</strong> (Cost per Acquisition) and
+<strong>CPM</strong> (Cost per 1,000 impressions), so that I could
+compare efficiency between Prospecting and Retargeting campaigns.”</p>
+</blockquote>
+<p>💬 (Here, you highlight your technical + analytical objective —
+summarize and compare.)</p>
+<hr />
+<h3 id="a--action"><strong>A — Action</strong></h3>
+<blockquote>
+<p>“Using Pandas, I grouped the dataset by the <em>Campaign</em> column
+and summed up numerical fields such as Impressions, Clicks, Quotes,
+Spend, and Sales. Then, I derived:</p>
+<ul>
+<li><strong>CPA = Spend / Sales</strong> to measure cost-efficiency of
+generating a sale, and</li>
+<li><strong>CPM = (Spend / Impressions) × 1000</strong> to measure cost
+of reaching 1,000 users.</li>
+</ul>
+<p>This gave me an aggregated view of campaign performance across all
+strategies.”</p>
+</blockquote>
+<p>💬 (This demonstrates both your technical fluency and the reasoning
+behind each calculation.)</p>
+<hr />
+<h3 id="r--result"><strong>R — Result</strong></h3>
+<blockquote>
+<p>“The aggregation revealed that <strong>Retargeting</strong> campaigns
+achieved a much lower CPA ($126.55) compared to
+<strong>Prospecting</strong> ($222.10), even though Retargeting had
+fewer impressions.</p>
+<p>This means Retargeting was significantly more cost-efficient in
+driving conversions, while Prospecting had a lower CPM ($1.43) —
+indicating it was better for broad audience reach.</p>
+<p>Based on this, I would recommend allocating a higher portion of the
+budget toward Retargeting campaigns for conversion efficiency, while
+maintaining some spend on Prospecting for awareness.”</p>
+</blockquote>
+<p>💬 (You’ve connected the numbers → insights → business decision →
+actionable recommendation.)</p>
+<hr />
+<p>✅ <strong>Final 30-second STAR summary for the
+interview:</strong></p>
+<blockquote>
+<p>“I grouped performance data by Campaign to evaluate Prospecting vs
+Retargeting. After aggregating metrics like Impressions, Clicks, Spend,
+and Sales, I calculated CPA and CPM to assess efficiency. The results
+showed that Retargeting delivered sales at nearly half the cost of
+Prospecting (CPA $126 vs $222), though Prospecting achieved cheaper
+reach (lower CPM). Hence, I’d recommend shifting more budget toward
+Retargeting for conversion efficiency while maintaining limited
+Prospecting for top-funnel awareness.”</p>
+</blockquote>
+<hr />
+<h2 id="bar_chart-part-2--insights-from-the-aggregated-result">📊 Part 2
+— Insights From the Aggregated Result</h2>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 9%" />
+<col style="width: 13%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Campaign</strong></th>
+<th style="text-align: right;"><strong>Impressions</strong></th>
+<th style="text-align: right;"><strong>Clicks</strong></th>
+<th style="text-align: right;"><strong>Quotes</strong></th>
+<th style="text-align: right;"><strong>Sales</strong></th>
+<th style="text-align: right;"><strong>Spend (<span
+class="math inline">) * *|* * <em>C</em><em>P</em><em>A</em>(</span>)</strong></th>
+<th style="text-align: right;"><strong>CPM ($)</strong></th>
+<th style="text-align: right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Prospecting</strong></td>
+<td style="text-align: right;">6,986,479</td>
+<td style="text-align: right;">2,199</td>
+<td style="text-align: right;">579</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">9,994.66</td>
+<td style="text-align: right;"><strong>222.10</strong></td>
+<td style="text-align: right;"><strong>1.43</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Retargeting</strong></td>
+<td style="text-align: right;">2,144,499</td>
+<td style="text-align: right;">1,379</td>
+<td style="text-align: right;">495</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">9,997.64</td>
+<td style="text-align: right;"><strong>126.55</strong></td>
+<td style="text-align: right;"><strong>4.66</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="small_blue_diamond-1-funnel-interpretation">🔹 <strong>1. Funnel
+Interpretation</strong></h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Funnel Stage</th>
+<th style="text-align: left;">Key Metric</th>
+<th style="text-align: right;">Prospecting</th>
+<th style="text-align: right;">Retargeting</th>
+<th style="text-align: left;">Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Awareness</strong></td>
+<td style="text-align: left;">Impressions</td>
+<td style="text-align: right;">6.98M</td>
+<td style="text-align: right;">2.14M</td>
+<td style="text-align: left;">Prospecting reached 3× more users → good
+for awareness</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Interest (Clicks)</strong></td>
+<td style="text-align: left;">Clicks</td>
+<td style="text-align: right;">2,199</td>
+<td style="text-align: right;">1,379</td>
+<td style="text-align: left;">Engagement levels somewhat similar
+considering spend</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Intent (Quotes)</strong></td>
+<td style="text-align: left;">Quotes</td>
+<td style="text-align: right;">579</td>
+<td style="text-align: right;">495</td>
+<td style="text-align: left;">Despite fewer impressions, Retargeting
+generated nearly as many quotes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Conversion</strong></td>
+<td style="text-align: left;">Sales</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: left;">Retargeting converted 1.7× more sales with
+fewer impressions</td>
+</tr>
+</tbody>
+</table>
+<p>✅ Retargeting clearly captures higher intent users and drives better
+conversions.</p>
+<hr />
+<h3 id="small_blue_diamond-2-efficiency-metrics">🔹 <strong>2.
+Efficiency Metrics</strong></h3>
+<ul>
+<li><p><strong>CPA (Cost per Sale)</strong></p>
+<ul>
+<li>Prospecting: $222 → High cost per conversion</li>
+<li>Retargeting: $126 → 43% cheaper</li>
+</ul></li>
+<li><p><strong>CPM (Cost per 1000 Impressions)</strong></p>
+<ul>
+<li>Prospecting: $1.43 → Cheap reach (broad audience)</li>
+<li>Retargeting: $4.66 → More expensive reach, but higher ROI</li>
+</ul></li>
+</ul>
+<p>✅ So, Prospecting = good <em>reach</em>, Retargeting = good
+<em>returns</em>.</p>
+<hr />
+<h3 id="small_blue_diamond-3-budget-allocation-insight">🔹 <strong>3.
+Budget Allocation Insight</strong></h3>
+<p>If total future budget = $20,000, you can allocate <strong>inversely
+proportional to CPA:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Campaign</th>
+<th style="text-align: right;">CPA</th>
+<th style="text-align: right;">Weight (1/CPA)</th>
+<th style="text-align: right;">% of Budget</th>
+<th style="text-align: right;">New Budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Prospecting</td>
+<td style="text-align: right;">222.10</td>
+<td style="text-align: right;">0.0045</td>
+<td style="text-align: right;">36%</td>
+<td style="text-align: right;">$7,200</td>
+</tr>
+<tr>
+<td style="text-align: left;">Retargeting</td>
+<td style="text-align: right;">126.55</td>
+<td style="text-align: right;">0.0079</td>
+<td style="text-align: right;">64%</td>
+<td style="text-align: right;">$12,800</td>
+</tr>
+</tbody>
+</table>
+<p>✅ Recommendation:</p>
+<ul>
+<li>Increase Retargeting budget from 50% → 65% (conversion
+efficiency).</li>
+<li>Keep Prospecting at ~35% to continue filling top of the funnel.</li>
+</ul>
+<hr />
+<h3 id="small_blue_diamond-4-business-level-interpretation">🔹
+<strong>4. Business-Level Interpretation</strong></h3>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Perspective</th>
+<th style="text-align: left;">Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Efficiency</strong></td>
+<td style="text-align: left;">Retargeting converts better and cheaper
+(lower CPA).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Scale</strong></td>
+<td style="text-align: left;">Prospecting has wider reach but weak
+conversion.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Optimization Plan</strong></td>
+<td style="text-align: left;">Reallocate spend — more toward
+Retargeting, less on Prospecting.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Next Step</strong></td>
+<td style="text-align: left;">Improve creative and audience targeting in
+Prospecting to reduce CPA.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="jigsaw-three-optional--how-to-present-this-in-the-interview">🧩
+3️⃣ Optional — How to Present This in the Interview</h2>
+<p>When they ask <em>“What did you find?”</em> → answer in 4 structured
+sentences:</p>
+<blockquote>
+<p>“After aggregating the data by Campaign, I compared Prospecting and
+Retargeting. Prospecting had broader reach (7M impressions) but a high
+CPA of $222, indicating poor efficiency. Retargeting, though smaller in
+scale, achieved lower CPA ($126) and 1.7× more conversions. Hence, I’d
+recommend shifting 15–20% of the Prospecting budget to Retargeting to
+improve ROI while maintaining awareness coverage.”</p>
+</blockquote>
+<hr />
+<p>✅ <strong>Key Takeaway for Interview</strong></p>
+<ul>
+<li>STAR = clear thinking and structure.</li>
+<li>Insights = data-driven + actionable.</li>
+<li>You show understanding of <strong>funnel dynamics, performance
+metrics, and budget trade-offs.</strong></li>
+</ul>
+<hr />
+</div>
+<div id="3004da31" class="cell code" data-execution_count="71">
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>d1</span></code></pre></div>
+<div class="output execute_result" data-execution_count="71">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Quotes</th>
+      <th>Sales</th>
+      <th>Spend</th>
+      <th>CPA</th>
+      <th>CPM</th>
+    </tr>
+    <tr>
+      <th>Campaign</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Prospecting</th>
+      <td>6986479</td>
+      <td>2199</td>
+      <td>579</td>
+      <td>45</td>
+      <td>9994.66</td>
+      <td>222.103556</td>
+      <td>1.430572</td>
+    </tr>
+    <tr>
+      <th>Retargeting</th>
+      <td>2144499</td>
+      <td>1379</td>
+      <td>495</td>
+      <td>79</td>
+      <td>9997.64</td>
+      <td>126.552405</td>
+      <td>4.661993</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="3e51bebf" class="cell markdown">
+<p>Here’s your dataset again for reference:</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 9%" />
+<col style="width: 13%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Campaign</strong></th>
+<th style="text-align: right;"><strong>Impressions</strong></th>
+<th style="text-align: right;"><strong>Clicks</strong></th>
+<th style="text-align: right;"><strong>Quotes</strong></th>
+<th style="text-align: right;"><strong>Sales</strong></th>
+<th style="text-align: right;"><strong>Spend (<span
+class="math inline">) * *|* * <em>C</em><em>P</em><em>A</em>(</span>)</strong></th>
+<th style="text-align: right;"><strong>CPM ($)</strong></th>
+<th style="text-align: right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Prospecting</strong></td>
+<td style="text-align: right;">6,986,479</td>
+<td style="text-align: right;">2,199</td>
+<td style="text-align: right;">579</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">9,994.66</td>
+<td style="text-align: right;"><strong>222.10</strong></td>
+<td style="text-align: right;"><strong>1.43</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Retargeting</strong></td>
+<td style="text-align: right;">2,144,499</td>
+<td style="text-align: right;">1,379</td>
+<td style="text-align: right;">495</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">9,997.64</td>
+<td style="text-align: right;"><strong>126.55</strong></td>
+<td style="text-align: right;"><strong>4.66</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="compass-one-reach--comparison-impressions">🧭 1️⃣ Reach %
+Comparison (Impressions)</h1>
+<p><strong>Reach</strong> measures <em>how many users were exposed</em>
+to the ad.</p>
+<p>[ \text{Reach % Difference} = \frac{\text{Prospecting Impr.} -
+\text{Retargeting Impr.}}{\text{Retargeting Impr.}} \times 100]</p>
+<p>[ = \frac{6{,}986{,}479 - 2{,}144{,}499}{2{,}144{,}499} \times 100 =
+225.8%]</p>
+<p>✅ <strong>Insight:</strong> Prospecting delivered <strong>~226% more
+impressions</strong> than Retargeting (≈ 3.26× higher reach).</p>
+<p>💬 <em>Interpretation:</em></p>
+<ul>
+<li>Prospecting is doing its job — <strong>broad reach</strong> and
+<strong>top-funnel awareness</strong>.</li>
+<li>But higher reach doesn’t mean efficiency; it’s just audience
+exposure.</li>
+<li>Good for filling the funnel with new potential customers.</li>
+</ul>
+<hr />
+<h1 id="moneybag-two-cpm--comparison-cost-per-1000-impressions">💰 2️⃣
+CPM % Comparison (Cost per 1,000 Impressions)</h1>
+<p>[ \text{CPM Difference} = \frac{4.66 - 1.43}{1.43} \times 100 =
+225.9%]</p>
+<p>✅ <strong>Insight:</strong> Retargeting’s CPM is <strong>~226%
+higher</strong> than Prospecting’s.</p>
+<p>💬 <em>Interpretation:</em></p>
+<ul>
+<li>Retargeting costs <strong>more per 1000 impressions</strong>,
+meaning it targets <strong>narrow, premium, high-intent
+users</strong>.</li>
+<li>That’s expected — retargeting audiences are smaller but more
+valuable.</li>
+<li>High CPM is <strong>not bad</strong> if it leads to better
+conversion efficiency (which it does, as shown by CPA).</li>
+</ul>
+<hr />
+<h1 id="balance_scale-three-cpa--comparison-cost-per-acquisition">⚖️ 3️⃣
+CPA % Comparison (Cost per Acquisition)</h1>
+<p>[ \text{CPA Difference} = \frac{222.10 - 126.55}{126.55} \times 100 =
+75.5%]</p>
+<p>✅ <strong>Insight:</strong> Prospecting’s CPA is <strong>~75.5%
+higher</strong> than Retargeting’s. OR equivalently, Retargeting’s CPA
+is <strong>43% lower</strong> than Prospecting’s.</p>
+<p>💬 <em>Interpretation:</em></p>
+<ul>
+<li>Retargeting drives <strong>sales nearly twice as
+efficiently</strong>.</li>
+<li>For every $100 spent, Retargeting gets almost <strong>1.7× more
+sales</strong>.</li>
+<li>Indicates strong bottom-funnel performance — you’re spending less to
+convert more.</li>
+</ul>
+<hr />
+<h1 id="chart_with_upwards_trend-four-combined-insights-summary">📈 4️⃣
+Combined Insights Summary</h1>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 15%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Prospecting</th>
+<th style="text-align: right;">Retargeting</th>
+<th style="text-align: right;">% Difference</th>
+<th style="text-align: left;">Key Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Reach (Impressions)</strong></td>
+<td style="text-align: right;">6.98M</td>
+<td style="text-align: right;">2.14M</td>
+<td style="text-align: right;">Prospecting +226%</td>
+<td style="text-align: left;">Broad reach for awareness</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CPM (<span
+class="math inline">) * *|1.43|4.66|<em>R</em><em>e</em><em>t</em><em>a</em><em>r</em><em>g</em><em>e</em><em>t</em><em>i</em><em>n</em><em>g</em> + 226| * *<em>C</em><em>P</em><em>A</em>(</span>)</strong></td>
+<td style="text-align: right;">222.1</td>
+<td style="text-align: right;">126.55</td>
+<td style="text-align: right;">Prospecting +75.5%</td>
+<td style="text-align: left;">Retargeting 43% cheaper per sale → better
+efficiency</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1
+id="brain-five-how-to-present-these-insights-verbally-interview-version">🧠
+5️⃣ How to Present These Insights Verbally (Interview Version)</h1>
+<blockquote>
+<p>“When I compared Prospecting and Retargeting campaigns, I found that
+Prospecting achieved about <strong>3× higher reach</strong> with much
+cheaper CPM ($1.4 vs $4.6), showing it’s effective for awareness.
+However, Retargeting had a <strong>43% lower CPA</strong>, meaning it
+converted far more efficiently despite the higher cost per
+impression.</p>
+<p>This shows Prospecting is strong at the top of the funnel, while
+Retargeting dominates the bottom of the funnel — so I’d reallocate a
+larger share of future budget to Retargeting for efficiency, while
+keeping Prospecting limited for reach and audience growth.”</p>
+</blockquote>
+<hr />
+<p>✅ <strong>Final Takeaway (for your interview answer):</strong></p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 11%" />
+<col style="width: 41%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Funnel Stage</th>
+<th style="text-align: left;">Campaign</th>
+<th style="text-align: left;">Efficiency</th>
+<th style="text-align: left;">Budget Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Top Funnel</strong></td>
+<td style="text-align: left;">Prospecting</td>
+<td style="text-align: left;">Wide reach (+226%) but costly CPA
+(+75%)</td>
+<td style="text-align: left;">Maintain smaller share (~30%)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bottom Funnel</strong></td>
+<td style="text-align: left;">Retargeting</td>
+<td style="text-align: left;">High CPM (+226%) but efficient CPA
+(–43%)</td>
+<td style="text-align: left;">Scale budget (~70%)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="626ee9ab" class="cell markdown">
+<h1 id="task-2">Task-2</h1>
+<ul>
+<li>metric: Sales</li>
+</ul>
+</div>
+<div id="bb8fadbc" class="cell code" data-execution_count="80">
+<div class="sourceCode" id="cb50"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>p_df<span class="op">=</span>df[df[<span class="st">&#39;Campaign&#39;</span>]<span class="op">==</span><span class="st">&quot;Prospecting&quot;</span>]</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>strategy<span class="op">=</span>p_df.groupby(<span class="st">&#39;Strategy&#39;</span>)[<span class="st">&#39;Sales&#39;</span>].<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>strategy.head(<span class="dv">3</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="80">
+<pre><code>Strategy
+Gumtree                            14
+Audience - in-Market - Holidays     6
+Audience - Mums                     6
+Name: Sales, dtype: int64</code></pre>
+</div>
+</div>
+<div id="20f0338e" class="cell code" data-execution_count="81">
+<div class="sourceCode" id="cb52"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>strategy_type<span class="op">=</span>p_df.groupby(<span class="st">&#39;Strategy Type&#39;</span>)[<span class="st">&#39;Sales&#39;</span>].<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>strategy_type.nlargest(<span class="dv">3</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="81">
+<pre><code>Strategy Type
+Context     20
+Audience    15
+Reach       10
+Name: Sales, dtype: int64</code></pre>
+</div>
+</div>
+<div id="94612786" class="cell code" data-execution_count="83">
+<div class="sourceCode" id="cb54"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>Seller<span class="op">=</span>p_df.groupby(<span class="st">&#39;Seller&#39;</span>)[<span class="st">&#39;Sales&#39;</span>].<span class="bu">sum</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>Seller.head(<span class="dv">3</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="83">
+<pre><code>Seller
+Adtegrity            6
+Google AdExchange    6
+Improve Digital      3
+Name: Sales, dtype: int64</code></pre>
+</div>
+</div>
+<div id="c325071f" class="cell markdown">
+<p>Excellent 🔥 — this “Top 3 Performer” task is your
+<strong>Task-2</strong>, and it’s designed to check not just your coding
+ability but also your <strong>analytical reasoning</strong> and
+<strong>decision-making mindset</strong> — exactly what MiQ looks for in
+a Trader Intern.</p>
+<p>Let’s go step-by-step to craft your <strong>STAR-based
+explanation</strong>, extract <strong>insights</strong>, and explain
+<strong>why you used total sales</strong> as the performance measure —
+along with <strong>other possible methods</strong> and their
+pros/cons.</p>
+<hr />
+<h1 id="brain-star-based-explanation-for-task-2">🧠 STAR-Based
+Explanation for Task-2</h1>
+<hr />
+<h3 id="s--situation"><strong>S — Situation</strong></h3>
+<blockquote>
+<p>“After analyzing overall campaign performance in Task-1, I wanted to
+identify the <strong>top-performing strategies, sellers, and strategy
+types</strong> within the Prospecting campaign. Prospecting generally
+targets new audiences for awareness and lead generation, so it’s
+important to know which elements are actually delivering the most
+conversions (sales).”</p>
+</blockquote>
+<p>💬 <em>(Sets context — focusing on Prospecting’s internal
+efficiency.)</em></p>
+<hr />
+<h3 id="t--task"><strong>T — Task</strong></h3>
+<blockquote>
+<p>“My task was to find the <strong>top 3 performers</strong> in three
+dimensions — <strong>Strategy</strong>, <strong>Seller</strong>, and
+<strong>Strategy Type</strong> — to identify which ones contributed most
+to overall sales volume.”</p>
+</blockquote>
+<p>💬 <em>(Defines analytical objective clearly.)</em></p>
+<hr />
+<h3 id="a--action"><strong>A — Action</strong></h3>
+<blockquote>
+<p>“I filtered the dataset for rows where <em>Campaign =
+Prospecting</em>, grouped the data separately by Strategy, Seller, and
+Strategy Type, summed up total Sales for each group, and then used the
+<code>nlargest(3)</code> function in Pandas to extract the top 3 in each
+category. This simple aggregation helps quickly identify which entities
+drive maximum conversions in Prospecting.”</p>
+</blockquote>
+<p>💬 <em>(Highlights logic, simplicity, and reproducibility.)</em></p>
+<hr />
+<h3 id="r--result"><strong>R — Result</strong></h3>
+<h4 id="results-obtained"><strong>Results Obtained</strong></h4>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 67%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Top 3 Performers</th>
+<th style="text-align: center;">Total Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Strategy</strong></td>
+<td style="text-align: left;">Gumtree, Audience – Mums, Audience –
+in-Market – Holidays</td>
+<td style="text-align: center;">14, 6, 6</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Seller</strong></td>
+<td style="text-align: left;">Adtegrity, Google AdExchange, Improve
+Digital</td>
+<td style="text-align: center;">6, 6, 3</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Strategy Type</strong></td>
+<td style="text-align: left;">Context, Audience, Reach</td>
+<td style="text-align: center;">20, 15, 10</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="jigsaw-insights-derived">🧩 <strong>Insights
+Derived</strong></h3>
+<h4 id="one-top-3-strategies">1️⃣ <strong>Top 3 Strategies</strong></h4>
+<ul>
+<li><strong>Gumtree</strong> outperformed others with <strong>14
+sales</strong>, contributing the largest share of conversions among
+Prospecting strategies.</li>
+<li>Audience-based strategies (“Mums”, “In-Market – Holidays”) also
+performed well, showing <strong>targeted audience segments</strong>
+outperform broad ones.</li>
+</ul>
+<p>💡 <em>Insight:</em> Targeted audiences outperform generic placements
+even in Prospecting, implying that contextual personalization improves
+conversion even in top-funnel campaigns.</p>
+<hr />
+<h4 id="two-top-3-sellers">2️⃣ <strong>Top 3 Sellers</strong></h4>
+<ul>
+<li><strong>Adtegrity</strong> and <strong>Google AdExchange</strong>
+each drove <strong>6 sales</strong>, suggesting these sellers offer
+better inventory quality for Prospecting.</li>
+<li><strong>Improve Digital</strong> followed with <strong>3
+sales</strong>, indicating moderate efficiency.</li>
+</ul>
+<p>💡 <em>Insight:</em> Seller quality directly impacts lead generation.
+Platforms like Google AdX deliver both <strong>scale and
+relevance</strong>.</p>
+<hr />
+<h4 id="three-top-3-strategy-types">3️⃣ <strong>Top 3 Strategy
+Types</strong></h4>
+<ul>
+<li><strong>Contextual targeting</strong> led with <strong>20
+sales</strong>, followed by <strong>Audience</strong> (15) and
+<strong>Reach</strong> (10).</li>
+<li>Indicates <strong>contextual and audience-based approaches are
+stronger</strong> even in early funnel stages.</li>
+</ul>
+<p>💡 <em>Insight:</em> Data-driven and contextual Prospecting works
+better than purely reach-based campaigns.</p>
+<hr />
+<p>✅ <strong>Summary of Results</strong></p>
+<blockquote>
+<p>“Contextual and Audience-based strategies drive higher conversions
+than Reach campaigns. Sellers like Adtegrity and Google AdX consistently
+appear among top performers, and targeted strategies such as Gumtree
+deliver the highest sales volume.”</p>
+</blockquote>
+<hr />
+<h1 id="jigsaw-why-i-chose-total-sales-as-performance-metric">🧩 Why I
+Chose <em>Total Sales</em> as Performance Metric</h1>
+<h3 id="pros-advantages"><strong>Pros (Advantages)</strong></h3>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Reason</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Direct measure of conversion
+success</strong></td>
+<td style="text-align: left;">Sales represent actual business outcomes,
+not intermediate actions like clicks or quotes.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Simple and
+interpretable</strong></td>
+<td style="text-align: left;">Easy for non-technical stakeholders to
+understand and visualize.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ideal for Prospecting
+comparison</strong></td>
+<td style="text-align: left;">Helps identify which early-stage
+strategies are effectively turning awareness into conversions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cons-limitations"><strong>Cons (Limitations)</strong></h3>
+<table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Limitation</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Ignores efficiency
+(CPA)</strong></td>
+<td style="text-align: left;">A strategy with more sales might still be
+less cost-effective.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Skews toward high-spend
+strategies</strong></td>
+<td style="text-align: left;">High-budget campaigns may appear
+“top-performing” just due to scale.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Doesn’t capture engagement
+quality</strong></td>
+<td style="text-align: left;">CTR, CVR, or Quote Rate differences aren’t
+visible here.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="gear-other-methods-to-find-top-performers">⚙️ Other Methods to
+Find Top Performers</h1>
+<h3 id="one-cpa-based-ranking-efficiency-focused"><strong>1️⃣ CPA-Based
+Ranking (Efficiency-Focused)</strong></h3>
+<p>[ \text{CPA} = \frac{\text{Spend}}{\text{Sales}}] ✅
+<strong>Pros</strong></p>
+<ul>
+<li>Reflects <em>cost efficiency</em> — lower CPA means better ROI.</li>
+<li>Prioritizes strategies delivering more conversions per dollar.</li>
+</ul>
+<p>❌ <strong>Cons</strong></p>
+<ul>
+<li>Can overrate small-sample strategies with very few sales (unstable
+CPA).</li>
+<li>Ignores overall scale (sales volume).</li>
+</ul>
+<hr />
+<h3 id="two-weighted-efficiency-sales--1cpa"><strong>2️⃣ Weighted
+Efficiency (Sales × 1/CPA)</strong></h3>
+<p>[ \text{Weighted Score} = \text{Sales} \times \frac{1}{\text{CPA}}]
+✅ <strong>Pros</strong></p>
+<ul>
+<li>Balances <strong>scale and efficiency</strong> simultaneously.</li>
+<li>Prevents bias toward large-spend or small-CPA strategies alone.</li>
+</ul>
+<p>❌ <strong>Cons</strong></p>
+<ul>
+<li>Needs both metrics clean and reliable (avoid zero-sales
+division).</li>
+<li>Slightly more complex to explain to non-analysts.</li>
+</ul>
+<hr />
+<h3 id="three-composite-score-normalized-metrics"><strong>3️⃣ Composite
+Score (Normalized Metrics)</strong></h3>
+<p>[ \text{Score} = w_1 \times \text{Sales} + w_2 \times (1/\text{CPA})
++ w_3 \times \text{CTR}] ✅ <strong>Pros</strong></p>
+<ul>
+<li>Multi-dimensional — considers volume, cost, and engagement.</li>
+<li>Used in advanced campaign optimization models.</li>
+</ul>
+<p>❌ <strong>Cons</strong></p>
+<ul>
+<li>Needs proper weight tuning (can introduce bias).</li>
+<li>Harder to communicate in simple dashboards.</li>
+</ul>
+<hr />
+<h3 id="four-roi-or-roas-based-ranking-profit-driven"><strong>4️⃣ ROI or
+ROAS-Based Ranking (Profit-Driven)</strong></h3>
+<p>If revenue per sale known: [ \text{ROAS} =
+\frac{\text{Revenue}}{\text{Spend}}] ✅ <strong>Pros</strong></p>
+<ul>
+<li>True profitability indicator.</li>
+<li>Great for optimizing budget allocation.</li>
+</ul>
+<p>❌ <strong>Cons</strong></p>
+<ul>
+<li>Requires accurate revenue data (often unavailable in task
+datasets).</li>
+</ul>
+<hr />
+<h1
+id="chart_with_upwards_trend-insights-from-each-attributes-top-performers">📈
+Insights from Each Attribute’s Top Performers</h1>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 40%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Insight from Top 3</th>
+<th style="text-align: left;">What It Means for a Trader</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Strategy</strong></td>
+<td style="text-align: left;">“Gumtree” dominates; audience-based
+strategies perform well</td>
+<td style="text-align: left;">Indicates targeted placements outperform
+broad ads even in Prospecting</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Seller</strong></td>
+<td style="text-align: left;">Google AdX &amp; Adtegrity top the
+list</td>
+<td style="text-align: left;">These platforms provide better traffic
+quality and conversion</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Strategy Type</strong></td>
+<td style="text-align: left;">Context &amp; Audience outperform
+Reach</td>
+<td style="text-align: left;">Investing in contextual relevance and data
+segments yields higher ROI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="compass-interview-ready-star-summary-1-minute-version">🧭
+Interview-Ready STAR Summary (1-Minute Version)</h1>
+<blockquote>
+<p>“In Task-2, I analyzed Prospecting data to identify top-performing
+strategies, sellers, and strategy types. I grouped by each attribute and
+used total sales to find the top 3 performers because sales are the most
+direct indicator of campaign success. The results showed that Gumtree,
+Google AdExchange, and Contextual targeting led in conversions — meaning
+targeted and contextually relevant campaigns outperform broad reach
+campaigns in Prospecting.</p>
+<p>The advantage of using total sales is its simplicity and alignment
+with business goals, though it ignores efficiency (CPA). Alternative
+approaches like CPA-based or weighted scoring methods could provide a
+more balanced view by combining cost efficiency and scale.”</p>
+</blockquote>
+<hr />
+<p>✅ <strong>Key Takeaways (for your interview):</strong></p>
+<ul>
+<li>You can explain <strong>methodology, logic, and
+trade-offs.</strong></li>
+<li>You connect <strong>data → insight → business action.</strong></li>
+<li>You understand <strong>alternative approaches</strong> and can
+justify <strong>why you chose one.</strong></li>
+</ul>
+<hr />
+<p>Would you like me to help you craft the <strong>Task-3 STAR
+answer</strong> (e.g., when you compared Prospecting vs Retargeting or
+computed top performers by CPA)?</p>
+</div>
+<div id="e5fa4892" class="cell markdown">
+<p>Perfect ✅ — this is exactly how you should structure your Task-3
+explanation in the MiQ interview. This task demonstrates <strong>your
+ability to measure efficiency (CPA)</strong>, <strong>handle data edge
+cases</strong>, and <strong>justify the choice of weighted
+averages</strong> — all of which are highly valued for Trader
+Interns.</p>
+<p>Below is a complete <strong>STAR-based explanation</strong> +
+intuitive <strong>example</strong> + reasoning for <strong>weighted CPA
+and NaN handling</strong> 👇</p>
+<hr />
+<h1 id="brain-star-based-explanation--top-performer-by-cpa">🧠
+STAR-Based Explanation — <em>Top Performer by CPA</em></h1>
+<hr />
+<h3 id="s--situation"><strong>S — Situation</strong></h3>
+<blockquote>
+<p>“After identifying the top performers by total sales in Task-2, I
+wanted to analyze which strategies, sellers, and strategy types were the
+most <strong>cost-efficient</strong> — that is, which ones drove
+conversions at the lowest average cost per acquisition (CPA). Since
+Prospecting campaigns vary in scale and spend, I needed a fair way to
+compare CPA performance across uneven datasets.”</p>
+</blockquote>
+<p>💬 <em>(Shows your analytical reasoning and why you moved beyond
+total sales.)</em></p>
+<hr />
+<h3 id="t--task"><strong>T — Task</strong></h3>
+<blockquote>
+<p>“My task was to compute the <strong>top 3 performers by CPA</strong>
+across three dimensions — <em>Strategy</em>, <em>Strategy Type</em>, and
+<em>Seller</em>. However, rather than a simple average, I used a
+<strong>weighted CPA</strong> to ensure larger-volume strategies had
+proportional influence on the results.”</p>
+</blockquote>
+<p>💬 <em>(Defines the objective precisely and introduces the improved
+metric.)</em></p>
+<hr />
+<h3 id="a--action"><strong>A — Action</strong></h3>
+<blockquote>
+<p>“I first removed rows where CPA was <code>NaN</code> — those
+corresponded to zero-sales records, where CPA is undefined. Then I
+grouped the valid Prospecting data by each attribute and calculated a
+<strong>weighted CPA</strong> using the formula:</p>
+<p>[ \text{Weighted CPA} = \frac{\sum(\text{CPA}_i \times
+\text{Sales}_i)}{\sum(\text{Sales}_i)}]</p>
+<p>This ensures that strategies contributing more sales have higher
+weight in the final CPA, avoiding distortion by small-sample strategies
+with very few conversions. Finally, I used <code>.nsmallest(3)</code> to
+extract the top 3 most efficient performers with the lowest overall
+CPA.”</p>
+</blockquote>
+<p>💬 <em>(Shows both your technical implementation and reasoning behind
+each step.)</em></p>
+<hr />
+<h3 id="r--result"><strong>R — Result</strong></h3>
+<blockquote>
+<p>“The output identified the 3 strategies, sellers, and strategy types
+with the <strong>lowest overall CPA</strong>, meaning they achieved
+conversions at the least cost. These are the most <strong>cost-efficient
+performers</strong>, ideal candidates for <strong>increased budget
+allocation or scaling</strong>.”</p>
+</blockquote>
+<p>💬 <em>(Emphasizes insight and business impact — key for a trading
+interview.)</em></p>
+<hr />
+<h1 id="abacus-one-how-weighted-cpa-works--simple-example">🧮 1️⃣ How
+Weighted CPA Works — Simple Example</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Strategy</th>
+<th style="text-align: right;">Sales</th>
+<th style="text-align: right;">Individual CPA ($)</th>
+<th style="text-align: right;">Weighted Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">10×100 = 1,000</td>
+</tr>
+<tr>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">100×50 = 5,000</td>
+</tr>
+<tr>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">5×200 = 1,000</td>
+</tr>
+</tbody>
+</table>
+<p>[ \text{Weighted CPA} = \frac{1{,}000 + 5{,}000 + 1{,}000}{10 + 100 +
+5} = \frac{7{,}000}{115} = 60.9]</p>
+<p>✅ So even though Strategy C has a high CPA (200), its low sales (5)
+don’t skew the overall result. Weighted CPA = realistic, business-scaled
+efficiency.</p>
+<hr />
+<h1
+id="balance_scale-two-why-use-weighted-cpa-and-not-simple-average">⚖️ 2️⃣
+Why Use Weighted CPA (and Not Simple Average)</h1>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 21%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Approach</th>
+<th style="text-align: left;">What It Does</th>
+<th style="text-align: left;">Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Simple Average CPA</strong></td>
+<td style="text-align: left;">Takes the mean of all CPAs</td>
+<td style="text-align: left;">Treats all campaigns equally, even if one
+has 1 sale and another 100 sales</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Weighted CPA</strong> ✅</td>
+<td style="text-align: left;">Weights by number of Sales</td>
+<td style="text-align: left;">Reflects <em>true cost efficiency</em> of
+the total conversions generated</td>
+</tr>
+</tbody>
+</table>
+<p>💬 <em>Example Insight:</em></p>
+<blockquote>
+<p>“If one strategy made 2 sales at ₹10 CPA and another made 200 sales
+at ₹20 CPA, a simple average (₹15) would understate the true cost.
+Weighted CPA (≈₹19.8) better represents the actual campaign
+performance.”</p>
+</blockquote>
+<hr />
+<h1 id="jigsaw-three-handling-edge-cases--when-cpa--nan">🧩 3️⃣ Handling
+Edge Cases — When CPA = NaN</h1>
+<p><strong>Why CPA becomes NaN:</strong></p>
+<ul>
+<li>CPA = Spend / Sales</li>
+<li>If <code>Sales = 0</code>, division by zero → <code>NaN</code></li>
+</ul>
+<p><strong>How you handled it:</strong></p>
+<div class="sourceCode" id="cb56"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df_valid <span class="op">=</span> prospecting_df.dropna(subset<span class="op">=</span>[<span class="st">&quot;CPA&quot;</span>])</span></code></pre></div>
+<p>✅ <strong>Why handle this:</strong></p>
+<ul>
+<li>Rows with <code>NaN</code> CPA mean <strong>no conversions</strong>,
+so CPA is <em>undefined</em>, not 0.</li>
+<li>Including them would produce false averages and mislead efficiency
+comparisons.</li>
+</ul>
+<p>💬 <em>Interview Explanation:</em></p>
+<blockquote>
+<p>“I excluded NaN CPA rows since those represent non-converting
+records. They’re valuable for awareness analysis but not for
+cost-efficiency ranking — including them would artificially inflate
+average CPA or cause division errors.”</p>
+</blockquote>
+<hr />
+<h1 id="bar_chart-four-insights-youd-present-from-the-result">📊 4️⃣
+Insights You’d Present From the Result</h1>
+<ul>
+<li>Strategies with the <strong>lowest CPA</strong> are most
+<strong>cost-efficient</strong> → they drive cheaper conversions.</li>
+<li>Comparing CPA with total sales can show whether a strategy is
+<em>efficient but small-scale</em> or <em>efficient and
+scalable</em>.</li>
+<li>Helps in <strong>budget reallocation</strong> — shifting funds
+toward high-efficiency, scalable segments.</li>
+</ul>
+<p>💬 <em>Example talking point:</em></p>
+<blockquote>
+<p>“The top CPA performers indicate which strategies provide the highest
+return on every dollar spent. These should receive a larger portion of
+the Prospecting budget in the next cycle, while high-CPA, low-conversion
+strategies should be optimized or paused.”</p>
+</blockquote>
+<hr />
+<h1 id="brain-five-star-summary-1-minute-interview-answer">🧠 5️⃣ STAR
+Summary (1-Minute Interview Answer)</h1>
+<blockquote>
+<p>“In Task-3, I aimed to find the most cost-efficient performers using
+CPA as the key metric. I filtered out NaN CPA rows caused by zero-sales
+cases, then grouped by Strategy, Seller, and Strategy Type. To ensure
+fairness, I calculated <strong>weighted CPA</strong> — multiplying each
+campaign’s CPA by its sales volume, summing across the group, and
+dividing by total sales. This approach gives more weight to larger
+campaigns and avoids small-sample distortions. The result highlighted
+which segments achieved the lowest CPA, helping prioritize them for
+future budget allocation.</p>
+<p>Weighted CPA is better than a simple average because it represents
+true cost efficiency across varying campaign sizes, and excluding NaN
+CPA ensures we only measure actual conversions.”</p>
+</blockquote>
+<hr />
+<p>✅ <strong>Key Takeaways (to memorize for interview):</strong></p>
+<ul>
+<li>Weighted CPA reflects <strong>scale-adjusted
+efficiency</strong>.</li>
+<li>Excluding NaN avoids <strong>false or infinite CPAs</strong>.</li>
+<li>Lower CPA = <strong>better efficiency</strong>, but cross-check with
+Sales volume before scaling.</li>
+</ul>
+<hr />
+<p>Would you like me to help you add the <strong>insight
+comparison</strong> — e.g., “Top 3 by Sales vs Top 3 by CPA” — and how
+to discuss that contrast in your interview (it’s a very common follow-up
+question)?</p>
+</div>
+<div id="b5a468d3" class="cell markdown">
+<p>Perfect 🔥 — now you’ve completed <strong>Task-2 for the Retargeting
+campaign</strong>, which mirrors what you did for Prospecting. This
+comparison is extremely valuable in the MiQ interview because it shows
+that you not only analyzed each campaign type, but also
+<strong>contrasted them strategically</strong> — identifying how
+<em>upper-funnel (Prospecting)</em> and <em>lower-funnel
+(Retargeting)</em> tactics differ.</p>
+<p>Let’s go step by step:</p>
+<hr />
+<h2
+id="brain-one-recap--prospecting-vs-retargeting-top-performers-by-sales">🧠
+1️⃣ Recap — Prospecting vs Retargeting (Top Performers by Sales)</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 9%" />
+<col style="width: 31%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;"><strong>Prospecting (Top 3)</strong></th>
+<th style="text-align: right;"><strong>Sales</strong></th>
+<th style="text-align: left;"><strong>Retargeting (Top 3)</strong></th>
+<th style="text-align: right;"><strong>Sales</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Strategy</strong></td>
+<td style="text-align: left;">Gumtree</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Homepage Unreached Users</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Audience – Mums</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Homepage 14 Day Recency</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Audience – In-Market Holidays</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Homepage 1-2 Day Recency</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Seller</strong></td>
+<td style="text-align: left;">Adtegrity</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Auto Trader Limited</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Google AdExchange</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Microsoft Advertising Exchange</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Improve Digital</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">AD2ONE LTD</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Strategy Type</strong></td>
+<td style="text-align: left;">Context</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Retargeting</td>
+<td style="text-align: right;">79</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Audience</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Reach</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="star-star-based-explanation">⭐ STAR-Based Explanation</h2>
+<h3 id="s--situation"><strong>S — Situation</strong></h3>
+<blockquote>
+<p>“After analyzing Prospecting campaign performance, I replicated the
+same process for the Retargeting campaign to identify which strategies,
+sellers, and strategy types generated the highest sales. Retargeting
+campaigns target previously engaged users, so their goal is conversion
+efficiency rather than broad reach.”</p>
+</blockquote>
+<hr />
+<h3 id="t--task"><strong>T — Task</strong></h3>
+<blockquote>
+<p>“My task was to aggregate sales across Retargeting strategies,
+sellers, and strategy types, identify the top 3 performers by total
+conversions, and then compare their performance pattern with the
+Prospecting campaign.”</p>
+</blockquote>
+<hr />
+<h3 id="a--action"><strong>A — Action</strong></h3>
+<blockquote>
+<p>“I filtered the dataset for rows where <em>Campaign =
+‘Retargeting’</em>, grouped by Strategy, Seller, and Strategy Type,
+summed the Sales, and used <code>.nlargest(3)</code> to extract the top
+3 performers for each. Then I compared these results to the Prospecting
+campaign to highlight how upper-funnel and lower-funnel strategies
+differ.”</p>
+</blockquote>
+<hr />
+<h3 id="r--result"><strong>R — Result</strong></h3>
+<blockquote>
+<p>“The top-performing Retargeting strategies — <em>Homepage Unreached
+Users</em>, <em>Homepage 14 Day Recency</em>, and <em>Homepage 1-2 Day
+Recency</em> — together delivered significantly higher total sales (28 +
+17 + 10 = 55) than Prospecting’s top strategies (14 + 6 + 6 = 26). This
+confirms that Retargeting is far more conversion-efficient.”</p>
+</blockquote>
+<hr />
+<h2
+id="bar_chart-two-insights--prospecting-vs-retargeting-comparison">📊 2️⃣
+Insights — Prospecting vs Retargeting Comparison</h2>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 23%" />
+<col style="width: 27%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dimension</th>
+<th style="text-align: left;"><strong>Prospecting</strong></th>
+<th style="text-align: left;"><strong>Retargeting</strong></th>
+<th style="text-align: left;"><strong>Comparison &amp;
+Interpretation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Objective</strong></td>
+<td style="text-align: left;">Acquire new users (awareness)</td>
+<td style="text-align: left;">Convert interested users (action)</td>
+<td style="text-align: left;">Complementary funnel stages</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Top Strategy Theme</strong></td>
+<td style="text-align: left;">Audience / Contextual</td>
+<td style="text-align: left;">Homepage Recency (1–14 days)</td>
+<td style="text-align: left;">Retargeting focuses on <em>recent
+visitors</em>, strong intent</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Top Seller Pattern</strong></td>
+<td style="text-align: left;">Open ad exchanges (Google AdX,
+Adtegrity)</td>
+<td style="text-align: left;">Premium direct sellers (Microsoft, Auto
+Trader)</td>
+<td style="text-align: left;">Retargeting relies on <em>high-quality,
+targeted inventory</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Sales Volume</strong></td>
+<td style="text-align: left;">Top 3 = 26 sales</td>
+<td style="text-align: left;">Top 3 = 55 sales</td>
+<td style="text-align: left;">Retargeting ≈ 2.1× higher conversions</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Strategy Type Mix</strong></td>
+<td style="text-align: left;">Context (20), Audience (15), Reach
+(10)</td>
+<td style="text-align: left;">Retargeting (79)</td>
+<td style="text-align: left;">Retargeting dominates lower funnel</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CPA Trend (from Task
+1)</strong></td>
+<td style="text-align: left;">~$222 per sale</td>
+<td style="text-align: left;">~$126 per sale</td>
+<td style="text-align: left;">Retargeting ≈ 43 % more
+cost-efficient</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Budget Focus</strong></td>
+<td style="text-align: left;">Lower cost → broader reach</td>
+<td style="text-align: left;">Higher CPM → better ROI</td>
+<td style="text-align: left;">Allocate larger share to Retargeting</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="bulb-three-key-business-insights">💡 3️⃣ Key Business
+Insights</h2>
+<ol>
+<li><p><strong>Recency Matters</strong> – The best-performing
+Retargeting strategies (1-day → 14-day recency) show that <strong>users
+who interacted recently are far more likely to convert</strong>. →
+Budget priority: recent-visitor pools.</p></li>
+<li><p><strong>Unreached Users Retargeting</strong> – “Homepage
+Unreached Users” (28 sales) performed best, suggesting that re-engaging
+high-intent visitors who missed earlier messaging is extremely
+valuable.</p></li>
+<li><p><strong>Prospecting Feeds Retargeting</strong> – Prospecting
+builds initial traffic; Retargeting harvests conversions from that
+audience. → The two are <strong>funnel complements</strong>, not
+substitutes.</p></li>
+<li><p><strong>Seller Insights</strong> – Premium networks (Microsoft,
+Auto Trader) work better for Retargeting due to more controlled
+placements and higher user relevance, while open exchanges (AdX,
+Adtegrity) scale Prospecting effectively.</p></li>
+<li><p><strong>Budget Strategy</strong> –</p>
+<ul>
+<li>Keep <strong>~30–35 %</strong> budget for Prospecting to maintain
+audience inflow.</li>
+<li>Shift <strong>~65–70 %</strong> to Retargeting for conversion
+efficiency.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="balance_scale-four-interview-ready-1-minute-answer">⚖️ 4️⃣
+Interview-Ready 1-Minute Answer</h2>
+<blockquote>
+<p>“I replicated my Prospecting analysis for the Retargeting campaign
+and found that retargeting strategies like <em>Homepage Unreached
+Users</em> and <em>14-Day Recency</em> drove nearly double the sales of
+Prospecting’s top strategies. While Prospecting used contextual and
+audience targeting for reach, Retargeting focused on recent visitors and
+achieved far higher conversion efficiency. Sellers such as Microsoft Ad
+Exchange and Auto Trader also stood out, showing that premium inventory
+yields better ROI in lower-funnel campaigns. This contrast highlights
+that Prospecting builds reach and audience pools, whereas Retargeting
+efficiently converts them — so budgets should be weighted toward
+Retargeting while keeping Prospecting for funnel inflow.”</p>
+</blockquote>
+<hr />
+<p>✅ <strong>Summary Table for Your Slide / Interview
+Notes</strong></p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Funnel</th>
+<th style="text-align: left;">Strength</th>
+<th style="text-align: left;">Weakness</th>
+<th style="text-align: left;">Role in Trading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Prospecting</strong></td>
+<td style="text-align: left;">Wide reach, cheap CPM</td>
+<td style="text-align: left;">High CPA, low conversion</td>
+<td style="text-align: left;">Build audience</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Retargeting</strong></td>
+<td style="text-align: left;">High conversion, low CPA</td>
+<td style="text-align: left;">Limited scale</td>
+<td style="text-align: left;">Monetize audience</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Would you like me to prepare a <strong>Task-2 &amp; Task-3 combined
+STAR summary</strong> (Prospecting Sales vs Retargeting Sales vs CPA) so
+you can deliver a single coherent 2-minute story in your interview?</p>
+</div>
+<div id="f13f4d5b" class="cell markdown">
+<p>Perfect 👏 — this is <em>exactly</em> the kind of question MiQ or any
+ad-tech/data analytics interviewer would ask you to explain
+conceptually, not just code-wise. Let’s break this into a clear,
+polished <strong>STAR-style + Insight-based explanation</strong> that
+you can directly use in your interview.</p>
+<hr />
+<h2 id="green_square-s--situation">🟩 <strong>S –
+Situation</strong></h2>
+<p>MiQ provided me with campaign performance data containing metrics
+like <em>Spend, Quotes, Sales, Strategy,</em> and <em>Campaign
+Type</em>. My task was to <strong>allocate a new budget of
+$15,000</strong> for the <em>Prospecting</em> campaign to achieve the
+<strong>target CPA of $150 per Sale</strong> and <strong>$14 per
+Quote</strong>.</p>
+<hr />
+<h2 id="green_square-t--task">🟩 <strong>T – Task</strong></h2>
+<p>I had to determine how to <strong>distribute this budget across
+multiple strategies</strong> under the Prospecting campaign in such a
+way that:</p>
+<ol>
+<li>The total stays within $15,000.</li>
+<li>Strategies with better historical performance (i.e., lower CPA)
+receive higher allocations.</li>
+<li>I could project future Quotes and Sales achievable under the new
+budget.</li>
+</ol>
+<hr />
+<h2 id="green_square-a--action">🟩 <strong>A – Action</strong></h2>
+<h3 id="one-filtered-relevant-campaign-data">1️⃣ <strong>Filtered
+Relevant Campaign Data</strong></h3>
+<p>I first filtered the dataset to include only the <em>Prospecting</em>
+campaign.</p>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>p_df <span class="op">=</span> df2[df2[<span class="st">&quot;Campaign&quot;</span>] <span class="op">==</span> <span class="st">&quot;Prospecting&quot;</span>]</span></code></pre></div>
+<h3 id="two-calculated-historical-cpa-for-each-strategy">2️⃣
+<strong>Calculated Historical CPA for Each Strategy</strong></h3>
+<p>To measure efficiency:</p>
+<ul>
+<li><code>CPA_Quote = Spend / Quotes</code></li>
+<li><code>CPA_Sale = Spend / Sales</code> I handled edge cases (like
+division by zero) using <code>np.where()</code> to replace invalid
+divisions with NaN.</li>
+</ul>
+<h3 id="three-computed-weighted-average-cpa-per-strategy">3️⃣
+<strong>Computed Weighted Average CPA per Strategy</strong></h3>
+<p>Instead of a simple mean CPA, I used a <strong>weighted CPA</strong>,
+giving higher importance to strategies that delivered more conversions.
+This avoids bias from small-volume strategies that had artificially low
+CPAs.</p>
+<div class="sourceCode" id="cb58"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>weighted_CPA <span class="op">=</span> (CPA <span class="op">*</span> conversions).<span class="bu">sum</span>() <span class="op">/</span> conversions.<span class="bu">sum</span>()</span></code></pre></div>
+<h3 id="four-allocated-budget-proportionally-programmatic-approach">4️⃣
+<strong>Allocated Budget Proportionally (Programmatic
+Approach)</strong></h3>
+<p>To reward efficiency:</p>
+<ul>
+<li>Calculated <strong>weights inversely proportional to CPA</strong> →
+lower CPA = higher efficiency = more budget.</li>
+<li>Normalized weights so the sum equals the total budget
+($15,000).</li>
+</ul>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> strategy_stats[<span class="st">&quot;Overall_CPA_Sale&quot;</span>]</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>strategy_stats[<span class="st">&quot;Budget_Allocated&quot;</span>] <span class="op">=</span> (weight <span class="op">/</span> weight.<span class="bu">sum</span>()) <span class="op">*</span> total_budget</span></code></pre></div>
+<h3 id="five-projected-future-performance">5️⃣ <strong>Projected Future
+Performance</strong></h3>
+<p>Based on target CPAs, projected how many Quotes and Sales each
+strategy could generate:</p>
+<div class="sourceCode" id="cb60"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>Projected_Quotes <span class="op">=</span> Budget_Allocated <span class="op">/</span> target_cpa_quote</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>Projected_Sales <span class="op">=</span> Budget_Allocated <span class="op">/</span> target_cpa_sale</span></code></pre></div>
+<hr />
+<h2 id="green_square-r--result">🟩 <strong>R – Result</strong></h2>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Budget_Allocated</th>
+<th>Projected_Quotes</th>
+<th>Projected_Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience - In Market - Insurance</td>
+<td>$9,410.91</td>
+<td>672</td>
+<td>63</td>
+</tr>
+<tr>
+<td>Audience - Mums</td>
+<td>$4,705.46</td>
+<td>336</td>
+<td>31</td>
+</tr>
+<tr>
+<td>Time of Day</td>
+<td>$427.77</td>
+<td>31</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Performing Geos</td>
+<td>$376.44</td>
+<td>27</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Audience - In Market - Holidays</td>
+<td>$35.87</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Broad Reach</td>
+<td>$30.75</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Gumtree</td>
+<td>$12.80</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>$15,000</strong></td>
+<td><strong>1072</strong></td>
+<td><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+<p>🟢 <strong>Insights:</strong></p>
+<ul>
+<li><em>Audience - In Market - Insurance</em> and <em>Audience -
+Mums</em> clearly outperform other strategies — they captured
+<strong>~95%</strong> of the total allocated budget.</li>
+<li>Lower-performing or niche strategies like <em>Gumtree</em> and
+<em>Broad Reach</em> received minimal budget, avoiding waste.</li>
+<li>Achieving 100 projected sales aligns with the target CPA of
+$150.</li>
+</ul>
+<hr />
+<h2 id="bulb-challenges--how-i-solved-them">💡 <strong>Challenges &amp;
+How I Solved Them</strong></h2>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr>
+<th>Challenge</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Division by Zero (no sales/quotes)</strong></td>
+<td>Used <code>np.where()</code> to replace divisions by zero with
+<code>NaN</code> and filled missing weights with 0.</td>
+</tr>
+<tr>
+<td><strong>Small sample strategies skewing CPA</strong></td>
+<td>Used <strong>weighted CPA</strong> instead of simple average to
+ensure fair comparison.</td>
+</tr>
+<tr>
+<td><strong>Ensuring budget sum = $15,000 exactly</strong></td>
+<td>Normalized weights to make the proportional allocation add up to the
+total.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="thought_balloon-why-weighted-cpa">💭 <strong>Why Weighted
+CPA?</strong></h2>
+<p>Weighted CPA gives a more reliable measure of performance because it
+considers both efficiency and volume. Example:</p>
+<ul>
+<li>Strategy A: CPA = $50 (2 sales)</li>
+<li>Strategy B: CPA = $60 (100 sales) If you take a simple mean, you’d
+wrongly think A is better — but weighted CPA reveals that B is
+consistently better at scale.</li>
+</ul>
+<hr />
+<h2 id="thought_balloon-why-programmatic-proportional-allocation">💭
+<strong>Why Programmatic (Proportional) Allocation</strong></h2>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Objective and data-driven — removes bias.</li>
+<li>Automatically scales budgets with performance efficiency.</li>
+<li>Easy to rerun for new budgets or target CPAs.</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Relies on past performance — may not capture future shifts.</li>
+<li>Doesn’t account for diminishing returns if budget increases too
+fast.</li>
+</ul>
+<hr />
+<h2 id="bulb-alternate-approaches-and-why-i-chose-this-one">💡
+<strong>Alternate Approaches (and Why I Chose This One)</strong></h2>
+<ul>
+<li><strong>Manual heuristic allocation:</strong> based on intuition or
+static % splits — simple but less data-driven.</li>
+<li><strong>Optimization model (ROI-based / regression):</strong> more
+precise but overkill for small datasets.</li>
+<li>✅ <strong>Chosen:</strong> Weighted inverse-CPA proportional
+allocation — simple, explainable, scalable.</li>
+</ul>
+<hr />
+<h2 id="dart-final-takeaway--insights">🎯 <strong>Final Takeaway /
+Insights</strong></h2>
+<p>This exercise gave me hands-on understanding of <strong>budget
+optimization, CPA-based performance measurement, and trade-offs between
+data-driven and heuristic allocation</strong>. It also deepened my grasp
+of the <strong>ad-tech funnel (Impressions → Clicks → Quotes →
+Sales)</strong> and how <strong>strategic budget shifts</strong> can
+maximize conversions while maintaining CPA goals.</p>
+<hr />
+<p>Would you like me to make this into a <strong>1-page written report
+summary</strong> you can attach or mention during your MiQ interview (as
+a polished explanation of your assignment)?</p>
+</div>
+<div id="b87fde0d" class="cell markdown">
+<p>Perfect — this is exactly the kind of structured analytical problem
+MiQ wants to see you explain fluently in your
+<strong>interview</strong>. Below is a <strong>complete STAR
+explanation</strong>, your <strong>approach rationale</strong>,
+<strong>edge-case handling</strong>, and <strong>insights</strong>, all
+written in clear, professional language — the way you’d present it in an
+interview or case discussion.</p>
+<hr />
+<h2 id="brain-star-answer-situation--task--action--result">🧠
+<strong>STAR Answer (Situation – Task – Action – Result)</strong></h2>
+<h3 id="s--situation"><strong>S – Situation:</strong></h3>
+<p>MiQ provided historical performance data for different
+<strong>retargeting strategies</strong> under a digital ad campaign.
+Each strategy had its <strong>spend</strong>, <strong>quotes</strong>,
+and <strong>sales</strong>. A <strong>new total budget of
+₹20,000</strong> was allocated for the next campaign cycle, and the task
+was to optimally distribute it across these strategies to maximize
+outcomes under the following targets:</p>
+<ul>
+<li>🎯 Target <strong>CPA (Cost per Sale)</strong> = ₹150</li>
+<li>🎯 Target <strong>CPA (Cost per Quote)</strong> = ₹14</li>
+</ul>
+<p>The goal was to make this allocation data-driven and
+performance-oriented.</p>
+<hr />
+<h3 id="t--task"><strong>T – Task:</strong></h3>
+<p>My task was to:</p>
+<ol>
+<li>Calculate each strategy’s <strong>historical efficiency</strong>
+using CPA metrics.</li>
+<li>Allocate the new budget <strong>proportionally to
+performance</strong>, giving more weight to efficient strategies.</li>
+<li>Handle missing or zero conversion data carefully.</li>
+<li>Forecast <strong>projected Quotes and Sales</strong> based on the
+new budget and target CPAs.</li>
+</ol>
+<hr />
+<h3 id="a--action"><strong>A – Action:</strong></h3>
+<h4 id="step-1-data-preparation--filtering"><strong>Step 1: Data
+Preparation &amp; Filtering</strong></h4>
+<p>Filtered the dataset for <strong>Retargeting</strong> campaigns
+only:</p>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>r_df <span class="op">=</span> df2[df2[<span class="st">&quot;Campaign&quot;</span>] <span class="op">==</span> <span class="st">&quot;Retargeting&quot;</span>]</span></code></pre></div>
+<p>Then calculated <strong>CPA for Quotes</strong> and <strong>CPA for
+Sales</strong> using conditional division:</p>
+<div class="sourceCode" id="cb62"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>r_df[<span class="st">&quot;CPA_Quote&quot;</span>] <span class="op">=</span> np.where(r_df[<span class="st">&quot;Quotes&quot;</span>] <span class="op">!=</span> <span class="dv">0</span>, r_df[<span class="st">&quot;Spend&quot;</span>] <span class="op">/</span> r_df[<span class="st">&quot;Quotes&quot;</span>], np.nan)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>r_df[<span class="st">&quot;CPA_Sale&quot;</span>]  <span class="op">=</span> np.where(r_df[<span class="st">&quot;Sales&quot;</span>]  <span class="op">!=</span> <span class="dv">0</span>, r_df[<span class="st">&quot;Spend&quot;</span>] <span class="op">/</span> r_df[<span class="st">&quot;Sales&quot;</span>],  np.nan)</span></code></pre></div>
+<p>✅ Prevented divide-by-zero issues ✅ Ensured strategies with no
+conversions don’t distort results</p>
+<hr />
+<h4 id="step-2-compute-weighted-cpas-efficiency-measure"><strong>Step 2:
+Compute Weighted CPAs (Efficiency Measure)</strong></h4>
+<p>Instead of a simple average CPA, I used <strong>Weighted CPA</strong>
+to make the metric conversion-volume aware:</p>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>weighted CPA <span class="op">=</span> Σ(CPA × conversions) <span class="op">/</span> Σ(conversions)</span></code></pre></div>
+<p>This gave a fairer view — e.g., a strategy with 100 sales and another
+with 2 shouldn’t influence the average equally.</p>
+<p><strong>Why Weighted CPA?</strong></p>
+<ul>
+<li>Accounts for both efficiency <em>and</em> volume.</li>
+<li>Reduces outlier distortion (like a small strategy with very high/low
+CPA).</li>
+</ul>
+<hr />
+<h4
+id="step-3-proportional-budget-allocation-programmatic-approach"><strong>Step
+3: Proportional Budget Allocation (Programmatic Approach)</strong></h4>
+<p>To allocate ₹20,000 fairly:</p>
+<ul>
+<li>Computed weights <strong>inversely proportional to CPA</strong> →
+<em>Lower CPA = More efficient = Higher weight</em></li>
+</ul>
+<div class="sourceCode" id="cb64"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> strategy_stats_2[<span class="st">&quot;Overall_CPA_Sale&quot;</span>]</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>strategy_stats_2[<span class="st">&quot;Budget_Allocated&quot;</span>] <span class="op">=</span> (weight <span class="op">/</span> weight.<span class="bu">sum</span>()) <span class="op">*</span> total_budget</span></code></pre></div>
+<p>✅ Automatically gave more budget to cost-efficient strategies. ✅
+Ensured all budgets sum exactly to ₹20,000.</p>
+<hr />
+<h4 id="step-4-projected-future-performance"><strong>Step 4: Projected
+Future Performance</strong></h4>
+<p>Based on MiQ’s target CPAs:</p>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>target_cpa_quote <span class="op">=</span> <span class="dv">14</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>target_cpa_sale  <span class="op">=</span> <span class="dv">120</span></span></code></pre></div>
+<p>Estimated expected conversions under optimized allocation:</p>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>Projected_Quotes <span class="op">=</span> Budget_Allocated <span class="op">/</span> target_cpa_quote</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>Projected_Sales  <span class="op">=</span> Budget_Allocated <span class="op">/</span> target_cpa_sale</span></code></pre></div>
+<hr />
+<h4 id="step-5-edge-case-handling"><strong>Step 5: Edge Case
+Handling</strong></h4>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 33%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Example</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zero quotes/sales → Infinite CPA</td>
+<td>Strategy with 0 conversions</td>
+<td>Used <code>np.nan</code> and replaced with 0 weight</td>
+</tr>
+<tr>
+<td>Missing data</td>
+<td>Some strategies had incomplete spend records</td>
+<td>Used fillna(0) to exclude them from weight calculations</td>
+</tr>
+<tr>
+<td>Extremely high CPA values</td>
+<td>Skewed averages</td>
+<td>Weighted average reduced their influence</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="r--result"><strong>R – Result:</strong></h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 14%" />
+<col style="width: 23%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Budget (₹)</th>
+<th>Projected Quotes</th>
+<th>Projected Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Homepage 10-Min Recency</td>
+<td>8,200</td>
+<td>586</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Homepage 1-Hour Recency</td>
+<td>5,467</td>
+<td>390</td>
+<td>46</td>
+</tr>
+<tr>
+<td>Homepage 1-Day Recency</td>
+<td>2,573</td>
+<td>184</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Homepage Unreached Users</td>
+<td>1,617</td>
+<td>115</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Homepage Performing Domains</td>
+<td>1,396</td>
+<td>100</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Homepage 1–2 Day Recency</td>
+<td>503</td>
+<td>36</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Homepage 14-Day Recency</td>
+<td>194</td>
+<td>14</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Homepage 2–13 Day Recency</td>
+<td>50</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Audience Overlay</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>✅ <strong>Total Budget:</strong> ₹20,000 ✅ <strong>Projected
+Quotes:</strong> 1,429 ✅ <strong>Projected Sales:</strong> 166</p>
+<hr />
+<h2 id="gear-why-this-approach-programmatic-weighted-allocation">⚙️
+<strong>Why This Approach (Programmatic Weighted
+Allocation)?</strong></h2>
+<h3 id="pros"><strong>Pros:</strong></h3>
+<ul>
+<li>Objective &amp; data-driven — removes guesswork.</li>
+<li>Scalable — easily extendable if new strategies are added.</li>
+<li>Favors high-performing, cost-efficient strategies.</li>
+<li>Simple to explain, visualize, and defend in an interview.</li>
+</ul>
+<h3 id="cons"><strong>Cons:</strong></h3>
+<ul>
+<li>Assumes linear relationship (Spend ↑ → Conversions ↑) — which may
+not always hold.</li>
+<li>Doesn’t model diminishing returns — advanced models like regression
+or optimization can refine it further.</li>
+</ul>
+<h3
+id="alternative-approaches-and-why-i-chose-not-to-use-them-yet"><strong>Alternative
+Approaches (and Why I Chose Not to Use Them Yet):</strong></h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 26%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Description</th>
+<th>Reason Not Chosen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equal distribution</td>
+<td>Split evenly</td>
+<td>Ignores past performance</td>
+</tr>
+<tr>
+<td>Sales/Quote-based weighting</td>
+<td>Allocate by total sales/quotes</td>
+<td>Misses cost efficiency</td>
+</tr>
+<tr>
+<td>Regression-based optimization</td>
+<td>Predict sales vs. spend</td>
+<td>Overkill for available data; requires more data points</td>
+</tr>
+<tr>
+<td>ROAS-based allocation</td>
+<td>Return-oriented</td>
+<td>Not applicable since revenue not given</td>
+</tr>
+</tbody>
+</table>
+<p>Hence, the <strong>inverse CPA-weighted proportional method</strong>
+struck the right balance between simplicity and insight.</p>
+<hr />
+<h2 id="bulb-insights-from-results">💡 <strong>Insights from
+Results</strong></h2>
+<ol>
+<li><p><strong>Recency drives conversions:</strong> Shorter recency
+windows (10-min &amp; 1-hour) dominate performance. These users are
+highly engaged → allocate majority budget here.</p></li>
+<li><p><strong>Long-tail inefficiency:</strong> Strategies like “2–13
+Day Recency” and “Audience Overlay” produced negligible results → can be
+<strong>paused or capped</strong>.</p></li>
+<li><p><strong>Balanced diversification:</strong> Some mid-range
+strategies (Unreached Users, Performing Domains) still received modest
+budgets to test secondary audience segments.</p></li>
+<li><p><strong>Improved conversion expectation:</strong> The
+proportional reallocation maintains cost efficiency while projecting
+<strong>1,429 Quotes &amp; 166 Sales</strong> under ₹20,000 — hitting
+the performance targets efficiently.</p></li>
+</ol>
+<hr />
+<h2 id="speaking_head-interview-ready-summary-1-min-pitch">🗣️
+<strong>Interview-Ready Summary (1-Min Pitch)</strong></h2>
+<blockquote>
+<p>“In the budget allocation task, I optimized ₹20,000 across
+retargeting strategies using a proportional, inverse-CPA-based
+allocation approach. I first computed weighted CPAs for fairness,
+handled zero or missing conversions safely, and allocated more budget to
+efficient strategies. This resulted in stronger focus on high-recency
+audiences and projected ~1,400 quotes and 166 sales at target CPAs. The
+task was both challenging and insightful — it deepened my understanding
+of the ad-tech funnel and data-driven decision-making in campaign
+optimization.”</p>
+</blockquote>
+<hr />
+<p>Would you like me to create a <strong>concise “cheat sheet”</strong>
+version of this — a 6–8 line summary you can read right before your MiQ
+interview for instant recall?</p>
+</div>
+<div id="19f523f9" class="cell markdown">
+<p>Excellent — this is the <em>final performance evaluation</em> stage
+of your MiQ assignment, where you analyze <strong>campaign efficiency
+after budget reallocation</strong>. Let’s go step-by-step and structure
+this into a <strong>STAR + insight-based interview explanation</strong>
+so you can clearly communicate your reasoning and learnings.</p>
+<hr />
+<h2 id="brain-star-based-interview-explanation">🧠 <strong>STAR-Based
+Interview Explanation</strong></h2>
+<h3 id="s--situation"><strong>S – Situation:</strong></h3>
+<p>After completing the <strong>budget reallocation</strong> for both
+<em>Prospecting</em> and <em>Retargeting</em> campaigns, the next step
+was to evaluate the <strong>impact on performance metrics</strong> —
+specifically <strong>Quotes, Sales, CPA (Cost per Acquisition), and CPM
+(Cost per 1,000 Impressions)</strong>. The goal was to check how
+effectively the new budget was distributed and whether it maintained or
+improved campaign efficiency.</p>
+<hr />
+<h3 id="t--task"><strong>T – Task:</strong></h3>
+<ol>
+<li><p>Compute key post-allocation metrics:</p>
+<ul>
+<li>Total projected <strong>Quotes</strong> and <strong>Sales</strong>
+for both campaigns.</li>
+<li>New <strong>CPA</strong> (based on projected Sales).</li>
+<li>Updated <strong>CPM</strong> (using historical impressions and
+proportional scaling).</li>
+</ul></li>
+<li><p>Compare these values against historical metrics to evaluate
+improvement or consistency.</p></li>
+<li><p>Explain why CPM remained unchanged after allocation.</p></li>
+</ol>
+<hr />
+<h3 id="a--action"><strong>A – Action:</strong></h3>
+<h4 id="step-1-calculated-aggregated-metrics"><strong>Step 1: Calculated
+Aggregated Metrics</strong></h4>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>total_quotes_prospecting <span class="op">=</span> budget_table[<span class="st">&#39;Projected_Quotes&#39;</span>].<span class="bu">sum</span>()</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>total_sales_prospecting  <span class="op">=</span> budget_table[<span class="st">&#39;Projected_Sales&#39;</span>].<span class="bu">sum</span>()</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>total_quotes_retargeting <span class="op">=</span> budget_table_2[<span class="st">&#39;Projected_Quotes&#39;</span>].<span class="bu">sum</span>()</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>total_sales_retargeting  <span class="op">=</span> budget_table_2[<span class="st">&#39;Projected_Sales&#39;</span>].<span class="bu">sum</span>()</span></code></pre></div>
+<p>✅ Combined the projections from all strategies under each
+campaign.</p>
+<hr />
+<h4
+id="step-2-calculated-new-cpas-cost-per-acquisition--sales"><strong>Step
+2: Calculated New CPAs (Cost per Acquisition – Sales)</strong></h4>
+<div class="sourceCode" id="cb68"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>cpa_prospecting <span class="op">=</span> budget_table[<span class="st">&#39;Budget_Allocated&#39;</span>].<span class="bu">sum</span>() <span class="op">/</span> total_sales_prospecting</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>cpa_retargeting <span class="op">=</span> budget_table_2[<span class="st">&#39;Budget_Allocated&#39;</span>].<span class="bu">sum</span>() <span class="op">/</span> total_sales_retargeting</span></code></pre></div>
+<p>✅ This shows the <strong>average cost to acquire one sale</strong>
+post-allocation. Prospecting CPA = <strong>₹150.00</strong>, Retargeting
+CPA = <strong>₹120.48</strong>, indicating the reallocation is
+cost-efficient.</p>
+<hr />
+<h4 id="step-3-calculated-cpm-cost-per-1000-impressions"><strong>Step 3:
+Calculated CPM (Cost per 1,000 Impressions)</strong></h4>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>cpm_prospecting <span class="op">=</span> (</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>    budget_table[<span class="st">&#39;Budget_Allocated&#39;</span>].<span class="bu">sum</span>()</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">/</span> ((agg.loc[<span class="st">&#39;Prospecting&#39;</span>, <span class="st">&#39;Impressions&#39;</span>] <span class="op">*</span> budget_table[<span class="st">&#39;Budget_Allocated&#39;</span>].<span class="bu">sum</span>()) <span class="op">/</span> agg.loc[<span class="st">&#39;Prospecting&#39;</span>, <span class="st">&#39;Spend&#39;</span>])</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>) <span class="op">*</span> <span class="dv">1000</span></span></code></pre></div>
+<p><strong>Explanation of logic:</strong></p>
+<ul>
+<li>The idea is to keep <strong>historical impression
+efficiency</strong> consistent.</li>
+<li>We estimate the <em>new impressions</em> proportionally to how the
+spend changes relative to historical spend: [ \text{New Impressions} =
+\text{Historical Impressions} \times \frac{\text{New
+Spend}}{\text{Historical Spend}}]</li>
+<li>Then calculate: [ \text{CPM} = \frac{\text{New Spend}}{\text{New
+Impressions}} \times 1000]</li>
+</ul>
+<p>✅ This keeps CPM consistent with the campaign’s historical cost
+efficiency per impression.</p>
+<hr />
+<h4 id="step-4-derived-final-metrics-table"><strong>Step 4: Derived
+Final Metrics Table</strong></h4>
+<table>
+<thead>
+<tr>
+<th><strong>Metric</strong></th>
+<th><strong>Prospecting</strong></th>
+<th><strong>Retargeting</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quotes</strong></td>
+<td>1,072</td>
+<td>1,429</td>
+</tr>
+<tr>
+<td><strong>Sales</strong></td>
+<td>100</td>
+<td>166</td>
+</tr>
+<tr>
+<td><strong>CPA (₹)</strong></td>
+<td>150.00</td>
+<td>120.48</td>
+</tr>
+<tr>
+<td><strong>CPM (₹)</strong></td>
+<td>1.43</td>
+<td>4.66</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="r--result"><strong>R – Result:</strong></h3>
+<p>✅ <strong>CPA Improvement:</strong></p>
+<ul>
+<li>Retargeting campaign achieved a lower CPA (₹120.48) — meaning it’s
+now acquiring customers more efficiently than before.</li>
+<li>Prospecting maintained its target CPA (₹150), indicating balanced
+allocation.</li>
+</ul>
+<p>✅ <strong>CPM Unchanged:</strong></p>
+<ul>
+<li>CPM stayed the same as historical data because <strong>impressions
+scale linearly with spend</strong> in the current proportional
+model.</li>
+<li>No change in media buying efficiency is expected until we optimize
+for creatives or bidding.</li>
+</ul>
+<p>✅ <strong>Total Volume Growth:</strong></p>
+<ul>
+<li>Combined projected sales = <strong>266 (100 + 166)</strong></li>
+<li>A significant increase in total conversions with the same spend
+efficiency.</li>
+</ul>
+<hr />
+<h2 id="gear-why-cpm-remained-unchanged">⚙️ <strong>Why CPM Remained
+Unchanged</strong></h2>
+<p><strong>Reason:</strong> CPM depends on <strong>spend per
+impression</strong>, not on conversions. Since the <strong>same
+platforms, ad formats, and auction mechanisms</strong> are used, and the
+allocation didn’t change the relative spend-to-impression ratio, the
+<strong>CPM remains constant</strong> — the campaign efficiency in
+<em>reach</em> stays the same.</p>
+<p>If we wanted CPM to change, we’d need to:</p>
+<ul>
+<li>Switch to more efficient inventory (e.g., cheaper publishers or ad
+exchanges).</li>
+<li>Optimize creatives or bidding strategies.</li>
+<li>Change targeting granularity.</li>
+</ul>
+<p>In this task, only <strong>budget distribution</strong> was optimized
+— not media cost — so CPM stays equal to historical CPM.</p>
+<hr />
+<h2 id="bulb-insights-from-results">💡 <strong>Insights from
+Results</strong></h2>
+<ol>
+<li><p><strong>Retargeting Outperforms Prospecting:</strong> Retargeting
+yields a lower CPA and higher sales volume, confirming that focusing on
+previously engaged users delivers better ROI.</p></li>
+<li><p><strong>Balanced Prospecting Efficiency:</strong> Prospecting
+maintained its CPA target — meaning the model didn’t over-allocate or
+under-allocate to any inefficient strategy.</p></li>
+<li><p><strong>Stable CPM Values:</strong> The unchanged CPM reflects
+consistent ad delivery costs — proving the reallocation maintained
+channel efficiency.</p></li>
+<li><p><strong>Performance Funnel Understanding:</strong> Prospecting
+drives awareness (Quotes), while Retargeting converts warm leads (Sales)
+— both complement each other for overall growth.</p></li>
+</ol>
+<hr />
+<h2 id="speaking_head-interview-ready-summary-60-seconds">🗣️
+<strong>Interview-Ready Summary (60 seconds)</strong></h2>
+<blockquote>
+<p>“After reallocating the budget, I calculated post-allocation metrics
+— Quotes, Sales, CPA, and CPM — for both campaigns. Using the weighted
+projections, Prospecting achieved 1,072 quotes and 100 sales at a ₹150
+CPA, while Retargeting achieved 1,429 quotes and 166 sales at a ₹120
+CPA. I used proportional scaling based on historical impressions to
+compute CPM, which remained constant because impression delivery costs
+didn’t change. The analysis showed that retargeting performs more
+efficiently per acquisition, while both campaigns maintained consistent
+reach efficiency.”</p>
+</blockquote>
+<hr />
+<p>Would you like me to also create a <strong>visual table (before vs
+after allocation)</strong> format for this — the kind you can show in
+the Excel workbook or PowerPoint if they ask you to “summarize impact
+visually”?</p>
+</div>
+<div id="c212754b" class="cell markdown">
+<p>Here’s a strong <strong>STAR-based answer</strong> with
+<strong>insights</strong> for <strong>7a</strong>:</p>
+<hr />
+<h3 id="question-7a"><strong>Question 7a:</strong></h3>
+<p><em>What type of product do you think the data relates to and
+why?</em></p>
+<hr />
+<h3 id="s--situation"><strong>S – Situation:</strong></h3>
+<p>I was provided with a campaign dataset that included metrics such as
+<strong>Quotes, Sales, Strategy Names, and Budget allocations</strong>
+for both <strong>Prospecting</strong> and <strong>Retargeting</strong>
+strategies. The task was to infer what type of product or service was
+being promoted based on the structure and terminology of the data.</p>
+<hr />
+<h3 id="t--task"><strong>T – Task:</strong></h3>
+<p>My objective was to identify the <strong>nature of the
+product</strong> behind the campaign by analyzing the <strong>data
+patterns, strategy naming conventions, and funnel stages</strong>
+reflected in the dataset.</p>
+<hr />
+<h3 id="a--action"><strong>A – Action:</strong></h3>
+<ul>
+<li>I observed that the dataset included both <strong>“Quotes”</strong>
+and <strong>“Sales”</strong> as performance metrics. This suggested a
+<strong>two-step conversion process</strong>, where customers first
+request a quote before completing a purchase — a pattern commonly seen
+in <strong>insurance, real estate, or financial service</strong>
+products.</li>
+<li>I further analyzed the <strong>strategy names</strong>, which
+included terms like <strong>“Audience - Cautious Homeowners”</strong>,
+<strong>“Audience - Mums”</strong>, and <strong>“Insurance -
+Keyword.”</strong></li>
+<li>These audience and keyword labels indicated <strong>targeted
+segments</strong> often associated with <strong>insurance or
+protection-based financial campaigns</strong>, where different
+demographics (homeowners, parents, etc.) are targeted with tailored
+messaging.</li>
+</ul>
+<hr />
+<h3 id="r--result"><strong>R – Result:</strong></h3>
+<p>Based on these observations, I concluded that the campaign most
+likely relates to an <strong>insurance product or financial
+service</strong> (e.g., home insurance, life insurance, or family
+protection plans).</p>
+<hr />
+<h3 id="insight"><strong>Insight:</strong></h3>
+<p>This exercise highlighted how <strong>campaign structure and funnel
+metrics</strong> can reveal the nature of a business model even without
+explicit labels.</p>
+<ul>
+<li>The presence of “Quotes → Sales” conversion stages indicates
+<strong>high-consideration products</strong> that require
+<strong>customer engagement before purchase</strong>.</li>
+<li>Audience-based strategies show a <strong>personalized targeting
+approach</strong>, which is key in <strong>ad-tech and insurance
+marketing</strong> to optimize reach and conversion efficiency.</li>
+</ul>
+<hr />
+<p>Would you like me to write similar <strong>STAR + Insight</strong>
+style answers for the next sub-questions (7b, 7c, 7d)?</p>
+</div>
+<div id="1d66dc49" class="cell markdown">
+<p>Here’s a <strong>STAR-based answer</strong> with clear
+<strong>insight, explanations, and layman-friendly reasoning</strong>
+for <strong>Question 7b</strong> 👇</p>
+<hr />
+<h3 id="question-7b"><strong>Question 7b:</strong></h3>
+<p><em>Suggest at least 3 new possible display advertising strategies
+for this particular campaign.</em></p>
+<hr />
+<h3 id="s--situation"><strong>S – Situation:</strong></h3>
+<p>From the previous analysis, the campaign data suggested that the
+product being promoted was most likely an <strong>insurance or financial
+service</strong>. The existing strategies in the dataset were focused on
+<strong>broad audience segments</strong> like <em>“Cautious
+Homeowners”</em> and <em>“Mums”</em>, and <strong>keyword-based
+targeting</strong> such as <em>“Insurance – Keyword.”</em> My goal was
+to suggest <strong>new display advertising strategies</strong> that
+could further optimize reach and improve conversion rates.</p>
+<hr />
+<h3 id="t--task"><strong>T – Task:</strong></h3>
+<p>To design <strong>3–4 new display advertising strategies</strong>
+that align with the nature of the product (insurance/financial) and help
+in improving engagement, conversion, and cost efficiency.</p>
+<hr />
+<h3 id="a--action"><strong>A – Action:</strong></h3>
+<p>I proposed the following new <strong>display advertising
+strategies</strong> —</p>
+<h4 id="1-localised-targeting-with-tailored-offers"><strong>1. Localised
+Targeting with Tailored Offers</strong></h4>
+<p><strong>Meaning:</strong> Show different ad creatives and offers
+depending on where a person lives. <strong>Why:</strong> Insurance and
+financial products are often influenced by <strong>regional
+risks</strong> (e.g., flood-prone areas, city traffic, or cost of
+living). <strong>Example:</strong> Showing <em>“Protect your home this
+monsoon – Get flood cover in Mumbai”</em> to users in coastal cities.
+<strong>Benefit:</strong> Makes the ad more <strong>relevant</strong>
+and <strong>personalized</strong>, improving click-through and
+conversion rates.</p>
+<hr />
+<h4 id="2-life-event-based-targeting"><strong>2. Life-Event Based
+Targeting</strong></h4>
+<p><strong>Meaning:</strong> Show ads to users when a major life event
+happens (like buying a house, having a baby, or changing jobs).
+<strong>Why:</strong> These events often trigger <strong>insurance
+needs</strong> — for example, new parents may look for life insurance,
+while new homeowners may seek home coverage. <strong>Example:</strong>
+Ads like <em>“Secure your child’s future with life insurance plans
+starting ₹499/month.”</em> <strong>Benefit:</strong> Helps reach users
+<strong>at the right moment of need</strong>, improving quote and sales
+conversion rates.</p>
+<hr />
+<h4 id="3-seasonal-or-contextual-campaigns"><strong>3. Seasonal or
+Contextual Campaigns</strong></h4>
+<p><strong>Meaning:</strong> Align ad campaigns with <strong>specific
+seasons or events</strong> that relate to insurance risk or financial
+activity. <strong>Why:</strong> During certain times (like
+<strong>monsoon season</strong>, <strong>tax-filing months</strong>, or
+<strong>festive periods</strong>), people are more aware of health,
+safety, or investment needs. <strong>Example:</strong></p>
+<ul>
+<li>“Monsoon Health Cover – Stay safe this rainy season.”</li>
+<li>“Tax Saving Life Insurance before March 31st.”
+<strong>Benefit:</strong> Creates <strong>urgency and
+relevance</strong>, increasing engagement and CTR.</li>
+</ul>
+<hr />
+<h4 id="additional-suggestion--optional"><em>(Additional suggestion –
+optional)</em></h4>
+<p><strong>4. Retargeting Based on Funnel Stage</strong>
+<strong>Meaning:</strong> Serve different ads based on user behavior —
+people who viewed quotes but didn’t buy can be shown personalized
+reminders or discount offers. <strong>Why:</strong> Keeps potential
+customers engaged and helps <strong>recover drop-offs</strong> in the
+funnel.</p>
+<hr />
+<h3 id="r--result"><strong>R – Result:</strong></h3>
+<p>These new strategies together can make the campaign more
+<strong>personalized</strong>, <strong>timely</strong>, and
+<strong>context-aware</strong>, which helps:</p>
+<ul>
+<li>Improve <strong>click-through rate (CTR)</strong> and <strong>quote
+generation</strong></li>
+<li>Reduce <strong>CPA (Cost per Acquisition)</strong> through better
+targeting</li>
+<li>Increase <strong>brand recall</strong> in key audience groups</li>
+</ul>
+<hr />
+<h3 id="insight"><strong>Insight:</strong></h3>
+<p>In display advertising, <strong>strategy</strong> simply means
+<em>“how you choose whom to show the ad to and what kind of message you
+show.”</em> These new strategies move beyond generic audience targeting
+to <strong>data-driven personalization</strong>, ensuring that ads are
+seen by people who are most likely to need the product <em>at the right
+place and right time.</em></p>
+<hr />
+<p>Would you like me to write similar <strong>STAR + insight</strong>
+answers for <strong>7c</strong> (optimisation suggestions) next?</p>
+</div>
+<div id="967dec46" class="cell markdown">
+<p>Here’s a <strong>STAR-based and insight-driven answer</strong> for
+<strong>Question 7c</strong> 👇</p>
+<hr />
+<h3 id="question-7c"><strong>Question 7c:</strong></h3>
+<p><em>Using the data at your disposal within the data table, suggest
+more ways to optimise the strategies provided.</em></p>
+<hr />
+<h3 id="s--situation"><strong>S – Situation:</strong></h3>
+<p>From the campaign dataset, I had access to performance metrics like
+<strong>Spend, Quotes, Sales, CPA</strong>, and <strong>Strategy
+names</strong> under two key campaign types —
+<strong>Prospecting</strong> and <strong>Retargeting</strong>. The goal
+was to identify <strong>how to optimise ad spend</strong> and improve
+<strong>conversion efficiency</strong> using these available
+metrics.</p>
+<hr />
+<h3 id="t--task"><strong>T – Task:</strong></h3>
+<p>To find <strong>data-backed optimisation actions</strong> that could
+help allocate budgets effectively, improve conversions, and reduce
+overall CPA (Cost per Acquisition).</p>
+<hr />
+<h3 id="a--action"><strong>A – Action:</strong></h3>
+<p>Based on the performance data, I suggested the following
+<strong>optimisation strategies:</strong></p>
+<h4 id="1-shift-budget-toward-high-performing-strategies"><strong>1.
+Shift Budget Toward High-Performing Strategies</strong></h4>
+<p><strong>What:</strong> Identify and prioritize strategies with
+<strong>low CPA and high total sales</strong>. <strong>How:</strong> Use
+CPA as the key efficiency metric — lower CPA means more cost-effective
+sales. Reallocate more budget from weaker to stronger performing
+strategies. <strong>Why:</strong> Ensures the marketing budget is
+invested in areas generating the <strong>maximum return on
+spend</strong>. <strong>Example:</strong> If <em>“Audience – Mums”</em>
+shows high sales with a lower CPA than <em>“Homepage 1 Day
+Recency”</em>, move more funds there.</p>
+<hr />
+<h4
+id="2-evaluate-and-rebalance-campaign-types-prospecting-vs-retargeting"><strong>2.
+Evaluate and Rebalance Campaign Types (Prospecting vs.
+Retargeting)</strong></h4>
+<p><strong>What:</strong> Compare the efficiency between
+<strong>Prospecting</strong> and <strong>Retargeting</strong> campaigns.
+<strong>How:</strong> Assess which delivers <strong>cheaper sales and
+higher conversion rate</strong>. If Retargeting shows lower CPA,
+slightly increase its share of the total budget. <strong>Why:</strong>
+This helps <strong>maximize efficiency</strong> at the funnel’s bottom
+stage while ensuring Prospecting continues to bring in new audiences.
+<strong>Example:</strong> Retargeting CPA = ₹120 vs. Prospecting CPA =
+₹150 → allocate more budget to Retargeting.</p>
+<hr />
+<h4 id="3-test-and-refine-audience-segments"><strong>3. Test and Refine
+Audience Segments</strong></h4>
+<p><strong>What:</strong> Analyse which audience segments (e.g.,
+<em>Cautious Homeowners</em>, <em>Mums</em>, <em>Insurance-Keyword</em>)
+generate <strong>better quotes and sales volume</strong>.
+<strong>How:</strong> Use quote-to-sale ratio and CPA per segment as
+indicators. <strong>Why:</strong> Optimising audience selection ensures
+targeting the <strong>most profitable user groups</strong>, improving
+both reach and ROI. <strong>Example:</strong> If <em>“Cautious
+Homeowners”</em> converts 30% more from quote to sale than
+<em>“In-Market Insurance”</em>, prioritize that segment in future
+campaigns.</p>
+<hr />
+<h3 id="r--result"><strong>R – Result:</strong></h3>
+<p>By implementing these optimisations:</p>
+<ul>
+<li>Budgets can be <strong>reallocated more strategically</strong>,
+leading to higher ROI.</li>
+<li><strong>Sales efficiency</strong> can improve by focusing on the
+best-performing strategies.</li>
+<li><strong>CPA</strong> can be reduced by removing underperforming
+segments and focusing on proven ones.</li>
+</ul>
+<hr />
+<h3 id="insight"><strong>Insight:</strong></h3>
+<p>These optimisations show a shift from a <strong>broad campaign
+strategy</strong> to a <strong>data-driven allocation
+model</strong>.</p>
+<ul>
+<li>Instead of evenly distributing spend, we <strong>let performance
+metrics drive decisions</strong>.</li>
+<li>Comparing Prospecting vs. Retargeting helps balance <strong>funnel
+growth and conversion efficiency</strong>.</li>
+<li>Audience testing keeps the strategy <strong>dynamic and
+adaptive</strong> to changing behavior patterns.</li>
+</ul>
+<hr />
+<p>Would you like me to create the same <strong>STAR + insight
+answer</strong> for <strong>7d</strong> (“What other campaign data could
+you look at to make optimisations from?”)?</p>
+</div>
+<div id="5420a503" class="cell markdown">
+<p>Here’s a <strong>STAR-based and insight-driven answer</strong> for
+<strong>Question 7d</strong> 👇</p>
+<hr />
+<h3 id="question-7d"><strong>Question 7d:</strong></h3>
+<p><em>We have only included a few metrics for this campaign in the
+“Data” tab (Strategy, Seller etc.). What other campaign data could you
+look at to make optimisations from?</em></p>
+<hr />
+<h3 id="s--situation"><strong>S – Situation:</strong></h3>
+<p>In the dataset provided, only limited metrics such as
+<strong>Strategy</strong>, <strong>Spend</strong>,
+<strong>Quotes</strong>, <strong>Sales</strong>, and
+<strong>CPA</strong> were available. While these metrics helped evaluate
+cost efficiency, they didn’t provide enough context on
+<strong>who</strong> was engaging with the ads, <strong>where</strong>
+they were engaging from, or <strong>when</strong> conversions were
+happening.</p>
+<hr />
+<h3 id="t--task"><strong>T – Task:</strong></h3>
+<p>To identify <strong>additional data points</strong> that would enable
+<strong>deeper campaign optimisation</strong> — helping improve audience
+targeting, timing, and regional strategy alignment.</p>
+<hr />
+<h3 id="a--action"><strong>A – Action:</strong></h3>
+<p>I identified three key categories of data that would significantly
+enhance the optimisation process:</p>
+<h4 id="1-demographic-data"><strong>1. Demographic Data</strong></h4>
+<p><strong>What:</strong> Include variables like <strong>age, gender,
+income level, household type</strong>, or <strong>occupation</strong>.
+<strong>Why:</strong> This helps us understand which audience group
+responds best to our campaign. <strong>How it helps:</strong> We can
+personalise creatives and messaging — for example, insurance plans for
+<em>young parents</em> vs. <em>retired homeowners</em>.
+<strong>Example:</strong> If women aged 30–45 are showing higher
+quote-to-sale conversion, more budget can be allocated to similar
+profiles.</p>
+<hr />
+<h4 id="2-geographic-data"><strong>2. Geographic Data</strong></h4>
+<p><strong>What:</strong> Include <strong>region, country,
+city</strong>, or even <strong>zip code-level targeting</strong>.
+<strong>Why:</strong> Product demand and conversion likelihood can vary
+by location due to local needs or weather conditions. <strong>How it
+helps:</strong> Enables <strong>location-based targeting</strong> and
+<strong>regional ad creatives</strong>. <strong>Example:</strong>
+Showing <em>home insurance</em> ads to flood-prone areas or <em>vehicle
+insurance</em> ads in urban regions with high traffic density.</p>
+<hr />
+<h4 id="3-time-of-day--day-of-week-data"><strong>3. Time-of-Day /
+Day-of-Week Data</strong></h4>
+<p><strong>What:</strong> Capture <strong>timestamp of clicks or
+impressions</strong>. <strong>Why:</strong> Allows understanding of when
+audiences are most active or responsive. <strong>How it helps:</strong>
+Enables <strong>time-based bid optimisation</strong>, ensuring higher ad
+spend during high-engagement periods. <strong>Example:</strong> If most
+conversions occur between 6–9 PM, focus ad delivery during that window
+to maximise ROI.</p>
+<hr />
+<h3 id="r--result"><strong>R – Result:</strong></h3>
+<p>By integrating demographic, geographic, and time-based data, campaign
+managers can:</p>
+<ul>
+<li>Achieve <strong>higher targeting precision</strong> and
+<strong>lower CPA</strong>.</li>
+<li>Personalise ads for <strong>specific audience
+segments</strong>.</li>
+<li>Increase <strong>conversion rates</strong> by focusing on the right
+people, in the right place, at the right time.</li>
+</ul>
+<hr />
+<h3 id="insight"><strong>Insight:</strong></h3>
+<p>This approach transforms the campaign from being
+<strong>strategy-driven</strong> to
+<strong>audience-intelligent</strong>.</p>
+<ul>
+<li>Instead of relying only on spend and CPA metrics, we begin to
+understand <strong>why</strong> certain strategies perform better.</li>
+<li>These extra data layers reveal <strong>hidden drivers of
+performance</strong> like audience behaviour patterns and geographic
+trends.</li>
+<li>Ultimately, this allows for <strong>predictive optimisation</strong>
+— anticipating where and when to spend before inefficiencies arise.</li>
+</ul>
+<hr />
+<p>Would you like me to write a concise <strong>1-paragraph
+version</strong> of this answer suitable for direct Excel or report
+submission (while keeping the STAR essence)?</p>
+</div>
+<div id="cec24f12" class="cell markdown">
+
+</div>
